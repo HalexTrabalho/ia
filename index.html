@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Letra Feia em Caligrafia Profissional</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --gemini-color: #4b8bf5;
+            --chatgpt-color: #10a37f;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 800px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            background-color: #eee;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab:hover {
+            background-color: #e2e6ea;
+        }
+
+        .tab.active-gemini {
+            background-color: white;
+            color: var(--gemini-color);
+            border-bottom: 3px solid var(--gemini-color);
+        }
+
+        .tab.active-chatgpt {
+            background-color: white;
+            color: var(--chatgpt-color);
+            border-bottom: 3px solid var(--chatgpt-color);
+        }
+
+        .content {
+            padding: 30px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 4px solid #ddd;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .prompt-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+        }
+
+        .copy-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #eee;
+        }
+
+        .highlight-gemini { border-left-color: var(--gemini-color); }
+        .highlight-chatgpt { border-left-color: var(--chatgpt-color); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Transforme Letra Feia em Caligrafia Profissional</h1>
+        <p class="subtitle">Tutorial passo a passo utilizando Inteligência Artificial</p>
+    </header>
+
+    <div class="tabs">
+        <div class="tab active-gemini" onclick="openTab('gemini')">Usando Gemini</div>
+        <div class="tab" onclick="openTab('chatgpt')">Usando ChatGPT</div>
+    </div>
+
+    <!-- Conteúdo Gemini -->
+    <div id="gemini" class="content active">
+        <div class="step highlight-gemini">
+            <span class="step-title">Passo 1: Enviar o Material</span>
+            <p>Clique no botão de <strong>+ (Adicionar)</strong> e faça o upload da foto do seu caderno (com a letra "feia") ou de um arquivo PDF que você deseja resumir.</p>
+        </div>
+
+        <div class="step highlight-gemini">
+            <span class="step-title">Passo 2: Transformar em Texto</span>
+            <p>Peça para a IA entender e organizar o conteúdo digitando o seguinte prompt:</p>
+            <div class="prompt-box">
+                Reescreva isso em anotações de estudo claras e concisas para as provas.
+                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+            </div>
+        </div>
+
+        <div class="step highlight-gemini">
+            <span class="step-title">Passo 3: Gerar a Imagem (Manuscrita)</span>
+            <p>Após o Gemini gerar o texto, peça para ele criar uma imagem simulando um caderno. Use o prompt abaixo:</p>
+            <div class="prompt-box">
+                Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).
+                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+            </div>
+            <p><small><em>Nota: Certifique-se de substituir "[INSIRA SEU TÓPICO AQUI]" pelo assunto do seu resumo.</em></small></p>
+        </div>
+    </div>
+
+    <!-- Conteúdo ChatGPT -->
+    <div id="chatgpt" class="content">
+        <div class="step highlight-chatgpt">
+            <span class="step-title">Passo 1: Enviar o Material</span>
+            <p>Clique no ícone de <strong>clipe</strong> ou <strong>+</strong> para anexar sua imagem ou arquivo PDF.</p>
+        </div>
+
+        <div class="step highlight-chatgpt">
+            <span class="step-title">Passo 2: Transformar em Texto</span>
+            <p>Primeiro, converta o conteúdo bagunçado em um texto organizado:</p>
+            <div class="prompt-box">
+                Reescreva isso em anotações de estudo claras e concisas para as provas.
+                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+            </div>
+        </div>
+
+        <div class="step highlight-chatgpt">
+            <span class="step-title">Passo 3: Gerar a Imagem (Manuscrita)</span>
+            <p>Peça para o DALL-E (integrado ao ChatGPT) criar a visualização final:</p>
+            <div class="prompt-box">
+                Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).
+                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+            </div>
+            <p><small><em>Nota: O ChatGPT costuma ter um desempenho ligeiramente superior na estética e na gramática de textos dentro de imagens.</em></small></p>
+        </div>
+    </div>
+
+    <div style="padding: 0 30px 20px 30px;">
+        <div class="note">
+            <strong>Dica Importante:</strong> A capacidade de gerar imagens depende da versão da IA que você está usando (geralmente disponível no Gemini Advanced e ChatGPT Plus/4o).
+        </div>
+    </div>
+
+    <footer>
+        Créditos do tutorial original: Canal <strong>Onde eu Clico</strong>
+    </footer>
+</div>
+
+<script>
+    function openTab(tabName) {
+        // Esconder todos os conteúdos
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Remover classe ativa das abas
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.classList.remove('active-gemini');
+            tab.classList.remove('active-chatgpt');
+        });
+
+        // Mostrar o conteúdo selecionado
+        document.getElementById(tabName).classList.add('active');
+
+        // Adicionar classe ativa na aba correta
+        const activeTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
+        if (tabName === 'gemini') {
+            activeTab.classList.add('active-gemini');
+        } else {
+            activeTab.classList.add('active-chatgpt');
+        }
+    }
+
+    function copyText(btn) {
+        const text = btn.parentElement.firstChild.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btn.textContent;
+            btn.textContent = "Copiado!";
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
