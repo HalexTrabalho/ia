@@ -1,279 +1,619 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial: Letra Feia em Caligrafia Profissional</title>
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --gemini-color: #4b8bf5;
-            --chatgpt-color: #10a37f;
-            --bg-color: #f4f6f9;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-radius: 12px;
-        }
+  <meta charset="UTF-8">
+  <title>Introdução à IA e Tutoriais Práticos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --gemini-color: #60a5fa;
+      --chatgpt-color: #4ade80;
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #020617;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #22c55e;
+      --danger: #ef4444;
+      --border-radius: 12px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            background-color: var(--card-bg);
-            width: 100%;
-            max-width: 800px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
 
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            border-bottom: 1px solid #eee;
-        }
+    /* --- Header --- */
+    header {
+      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      color: #f9fafb;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            color: #2c3e50;
-        }
+    header h1 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 0.75rem;
+    }
 
-        .subtitle {
-            color: #7f8c8d;
-            margin-top: 10px;
-            font-size: 1rem;
-        }
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .tabs {
-            display: flex;
-            cursor: pointer;
-            background-color: #eee;
-        }
+    /* --- Layout Principal --- */
+    main {
+      max-width: 1100px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 1rem 2rem;
+    }
 
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
+    section {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
 
-        .tab:hover {
-            background-color: #e2e6ea;
-        }
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.5rem;
+    }
 
-        .tab.active-gemini {
-            background-color: white;
-            color: var(--gemini-color);
-            border-bottom: 3px solid var(--gemini-color);
-        }
+    section h2 span.icon {
+      font-size: 1.5rem;
+    }
 
-        .tab.active-chatgpt {
-            background-color: white;
-            color: var(--chatgpt-color);
-            border-bottom: 3px solid var(--chatgpt-color);
-        }
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      color: #cbd5e1;
+    }
 
-        .content {
-            padding: 30px;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
 
-        .content.active {
-            display: block;
-        }
+    li {
+      margin-bottom: 0.4rem;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* --- Grid e Componentes Gerais --- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
 
-        .step {
-            margin-bottom: 25px;
-            padding-left: 20px;
-            border-left: 4px solid #ddd;
-        }
+    .highlight {
+      color: #bfdbfe;
+      font-weight: 600;
+    }
 
-        .step-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            display: block;
-        }
+    /* --- Tags e Chips --- */
+    .companies-tags, .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
 
-        .prompt-box {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 15px;
-            border-radius: 6px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            position: relative;
-        }
+    .company-tag, .chip {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+    }
 
-        .copy-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-        }
+    .company-tag span {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      margin-left: 0.4rem;
+      padding-left: 0.4rem;
+      border-left: 1px solid rgba(255,255,255,0.2);
+    }
 
-        .copy-btn:hover {
-            background-color: #f0f0f0;
-        }
+    /* --- Gráfico --- */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: radial-gradient(circle at top, #0b1120, #020617);
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 1rem;
+    }
+    .chart-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
 
-        .note {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
+    /* --- Prompts Box (Estilo Unificado) --- */
+    .prompt-box {
+      background: #0b1121;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #888;
-            border-top: 1px solid #eee;
-        }
+    .prompt-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
 
-        .highlight-gemini { border-left-color: var(--gemini-color); }
-        .highlight-chatgpt { border-left-color: var(--chatgpt-color); }
-    </style>
+    .prompt-text {
+      font-family: "Consolas", "Monaco", "Courier New", monospace;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px dashed rgba(148, 163, 184, 0.3);
+      color: #a5b4fc;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(30, 41, 59, 0.8);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #064e3b;
+    }
+
+    /* --- Info Box --- */
+    .info-box {
+      background: rgba(30, 58, 138, 0.15);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+    .info-box strong { color: #a5b4fc; }
+
+    /* --- Estilos Específicos do Tutorial (Abas) --- */
+    .tutorial-tabs {
+      display: flex;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      padding: 4px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .tab:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    .tab.active-gemini {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--gemini-color);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+    }
+
+    .tab.active-chatgpt {
+      background: rgba(22, 163, 74, 0.15);
+      color: var(--chatgpt-color);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.3);
+    }
+
+    .tutorial-content {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .tutorial-content.active { display: block; }
+
+    .step {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      border-left: 3px solid #334155;
+    }
+    .highlight-gemini .step { border-left-color: var(--gemini-color); }
+    .highlight-chatgpt .step { border-left-color: var(--chatgpt-color); }
+
+    .step-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+
+    /* --- Quiz --- */
+    .quiz-question {
+      background: rgba(30, 41, 59, 0.4);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .quiz-options label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .quiz-options label:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    
+    .score { margin-left: 1rem; font-weight: bold; color: var(--accent); }
+    .answers span { display: inline-block; margin: 0.2rem; padding: 0.2rem 0.6rem; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 0.85rem; }
+    .correct { color: #4ade80; }
+    .incorrect { color: #f87171; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      header { padding: 1.5rem 1rem; }
+      section { padding: 1.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Transforme Letra Feia em Caligrafia Profissional</h1>
-        <p class="subtitle">Tutorial passo a passo utilizando Inteligência Artificial</p>
-    </header>
+<header>
+  <h1>IA na Prática & Tutoriais</h1>
+  <p>Conceitos fundamentais, exemplos de uso e um tutorial passo a passo para transformar caligrafia com Inteligência Artificial.</p>
+</header>
 
-    <div class="tabs">
-        <div class="tab active-gemini" onclick="openTab('gemini')">Usando Gemini</div>
-        <div class="tab" onclick="openTab('chatgpt')">Usando ChatGPT</div>
+<main>
+  <!-- Seção 1: O que é IA -->
+  <section id="o-que-e-ia">
+    <h2><span class="icon">🤖</span>O que é Inteligência Artificial?</h2>
+    <p>De forma simples, Inteligência Artificial é uma área da computação que cria sistemas capazes de realizar tarefas que normalmente exigem inteligência humana, como reconhecer padrões, tomar decisões e gerar conteúdo.</p>
+    <p>Esses sistemas usam <span class="highlight">algoritmos</span> e grandes volumes de dados para aprender com exemplos em vez de receber instruções rígidas para cada situação.</p>
+  </section>
+
+  <!-- Seção 2: Como funciona -->
+  <section id="como-funciona">
+    <h2><span class="icon">🧠</span>Como funciona uma IA</h2>
+    <div class="grid-2">
+      <div>
+        <p>O funcionamento moderno de IA, especialmente em modelos generativos, passa por três fases principais:</p>
+        <ul>
+          <li><strong>Coleta de dados:</strong> textos, imagens, áudios ou registros históricos.</li>
+          <li><strong>Treinamento:</strong> o algoritmo ajusta milhões de parâmetros para reduzir erros.</li>
+          <li><strong>Inferência:</strong> o modelo treinado responde e cria a partir de novas entradas.</li>
+        </ul>
+        <p>Na prática, você conversa com um modelo já treinado e guia o comportamento dele com bons prompts (Engenharia de Prompt).</p>
+      </div>
+      <div>
+        <!-- Gráfico Visual Simplificado com CSS/HTML para leveza -->
+        <div class="chart-container" style="display:flex; align-items:flex-end; justify-content:space-around; padding-bottom:30px;">
+             <!-- Barras simuladas -->
+             <div style="width:10%; height:20%; background:#3730a3; border-radius:4px 4px 0 0;"></div>
+             <div style="width:10%; height:35%; background:#4338ca; border-radius:4px 4px 0 0;"></div>
+             <div style="width:10%; height:50%; background:#4f46e5; border-radius:4px 4px 0 0;"></div>
+             <div style="width:10%; height:75%; background:#6366f1; border-radius:4px 4px 0 0;"></div>
+             <div style="width:10%; height:90%; background:#818cf8; border-radius:4px 4px 0 0; position:relative;">
+                <span style="position:absolute; top:-25px; left:-10px; font-size:0.7rem; color:#fff; width:60px;">Hoje</span>
+             </div>
+        </div>
+        <div class="chart-labels">
+          <span>1950 (Início)</span>
+          <span>Evolução Exponencial da IA</span>
+          <span>Futuro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3: Tutorial Prático (Novo Conteúdo) -->
+  <section id="tutorial-caligrafia" style="border: 1px solid rgba(96, 165, 250, 0.3);">
+    <h2><span class="icon">✍️</span>Tutorial: Caligrafia Profissional com IA</h2>
+    <p>Aprenda a transformar fotos de cadernos com letra "feia" em resumos esteticamente perfeitos usando o Gemini ou ChatGPT.</p>
+    
+    <div class="tutorial-tabs">
+        <div class="tab active-gemini" onclick="openTab('gemini')">Usando Gemini (Google)</div>
+        <div class="tab" onclick="openTab('chatgpt')">Usando ChatGPT (OpenAI)</div>
     </div>
 
     <!-- Conteúdo Gemini -->
-    <div id="gemini" class="content active">
-        <div class="step highlight-gemini">
-            <span class="step-title">Passo 1: Enviar o Material</span>
-            <p>Clique no botão de <strong>+ (Adicionar)</strong> e faça o upload da foto do seu caderno (com a letra "feia") ou de um arquivo PDF que você deseja resumir.</p>
+    <div id="gemini" class="tutorial-content active highlight-gemini">
+        <div class="step">
+            <span class="step-title">1. Enviar o Material</span>
+            <p>No Gemini, clique no ícone de <strong>+ (Adicionar)</strong> e faça o upload da foto do seu caderno ou arquivo PDF que deseja resumir.</p>
         </div>
 
-        <div class="step highlight-gemini">
-            <span class="step-title">Passo 2: Transformar em Texto</span>
-            <p>Peça para a IA entender e organizar o conteúdo digitando o seguinte prompt:</p>
+        <div class="step">
+            <span class="step-title">2. Transformar em Texto</span>
             <div class="prompt-box">
-                Reescreva isso em anotações de estudo claras e concisas para as provas.
-                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+                <div class="prompt-title">Prompt de Texto</div>
+                <button class="copy-btn" data-target="p-gemini-1">Copiar</button>
+                <div class="prompt-text" id="p-gemini-1">Reescreva isso em anotações de estudo claras e concisas para as provas.</div>
             </div>
         </div>
 
-        <div class="step highlight-gemini">
-            <span class="step-title">Passo 3: Gerar a Imagem (Manuscrita)</span>
-            <p>Após o Gemini gerar o texto, peça para ele criar uma imagem simulando um caderno. Use o prompt abaixo:</p>
+        <div class="step">
+            <span class="step-title">3. Gerar a Imagem do Caderno</span>
+            <p>Após a IA gerar o texto, peça para criar a imagem simulando um caderno:</p>
             <div class="prompt-box">
-                Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).
-                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+                <div class="prompt-title">Prompt de Imagem</div>
+                <button class="copy-btn" data-target="p-gemini-2">Copiar</button>
+                <div class="prompt-text" id="p-gemini-2">Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).</div>
             </div>
-            <p><small><em>Nota: Certifique-se de substituir "[INSIRA SEU TÓPICO AQUI]" pelo assunto do seu resumo.</em></small></p>
         </div>
     </div>
 
     <!-- Conteúdo ChatGPT -->
-    <div id="chatgpt" class="content">
-        <div class="step highlight-chatgpt">
-            <span class="step-title">Passo 1: Enviar o Material</span>
-            <p>Clique no ícone de <strong>clipe</strong> ou <strong>+</strong> para anexar sua imagem ou arquivo PDF.</p>
+    <div id="chatgpt" class="tutorial-content highlight-chatgpt">
+        <div class="step">
+            <span class="step-title">1. Enviar o Material</span>
+            <p>No ChatGPT, use o ícone de <strong>clipe</strong> para anexar sua imagem ou PDF.</p>
         </div>
 
-        <div class="step highlight-chatgpt">
-            <span class="step-title">Passo 2: Transformar em Texto</span>
-            <p>Primeiro, converta o conteúdo bagunçado em um texto organizado:</p>
+        <div class="step">
+            <span class="step-title">2. Transformar em Texto</span>
             <div class="prompt-box">
-                Reescreva isso em anotações de estudo claras e concisas para as provas.
-                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+                <div class="prompt-title">Prompt de Texto</div>
+                <button class="copy-btn" data-target="p-gpt-1">Copiar</button>
+                <div class="prompt-text" id="p-gpt-1">Reescreva isso em anotações de estudo claras e concisas para as provas.</div>
             </div>
         </div>
 
-        <div class="step highlight-chatgpt">
-            <span class="step-title">Passo 3: Gerar a Imagem (Manuscrita)</span>
-            <p>Peça para o DALL-E (integrado ao ChatGPT) criar a visualização final:</p>
+        <div class="step">
+            <span class="step-title">3. Gerar a Imagem (DALL-E)</span>
             <div class="prompt-box">
-                Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).
-                <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+                <div class="prompt-title">Prompt de Imagem</div>
+                <button class="copy-btn" data-target="p-gpt-2">Copiar</button>
+                <div class="prompt-text" id="p-gpt-2">Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).</div>
             </div>
-            <p><small><em>Nota: O ChatGPT costuma ter um desempenho ligeiramente superior na estética e na gramática de textos dentro de imagens.</em></small></p>
         </div>
     </div>
+    
+    <div class="info-box">
+        <strong>Nota:</strong> A geração de imagens requer versões avançadas (Gemini Advanced ou ChatGPT Plus/4o). Não se esqueça de substituir <em>[INSIRA SEU TÓPICO AQUI]</em> pelo assunto real. <br><small>Créditos do método: Canal Onde eu Clico.</small>
+    </div>
+  </section>
 
-    <div style="padding: 0 30px 20px 30px;">
-        <div class="note">
-            <strong>Dica Importante:</strong> A capacidade de gerar imagens depende da versão da IA que você está usando (geralmente disponível no Gemini Advanced e ChatGPT Plus/4o).
-        </div>
+  <!-- Seção 4: Outros Prompts Úteis -->
+  <section id="prompts">
+    <h2><span class="icon">⌨️</span>Outros Prompts Práticos</h2>
+    <p>Exemplos gerais para professores e profissionais.</p>
+
+    <div class="prompt-box">
+      <div class="prompt-title">Planejamento de Aula</div>
+      <button class="copy-btn" data-target="prompt-aula">Copiar</button>
+      <div class="prompt-text" id="prompt-aula">Você é um professor especialista em tecnologia. Crie um plano de aula de 1h30 sobre Inteligência Artificial para iniciantes, incluindo: objetivos, tópicos principais, exemplos práticos e 5 exercícios.</div>
     </div>
 
-    <footer>
-        Créditos do tutorial original: Halex <strong>System&reg</strong>
-    </footer>
-</div>
+    <div class="prompt-box">
+      <div class="prompt-title">Análise de Dados com @</div>
+      <button class="copy-btn" data-target="prompt-analise">Copiar</button>
+      <div class="prompt-text" id="prompt-analise">Analise este arquivo @planilha_resultados e este documento @relatorio. Resuma os principais problemas e crie um plano de ação em 5 passos.</div>
+    </div>
+  </section>
+
+  <!-- Seção 5: Quiz -->
+  <section id="quiz">
+    <h2><span class="icon">✅</span>Quiz Interativo</h2>
+    <p>Teste seu conhecimento sobre IA com 5 perguntas aleatórias.</p>
+    <div id="quiz-container"></div>
+    
+    <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem;">
+        <button id="calc-btn" class="btn">Calcular Nota</button>
+        <span class="score" id="score"></span>
+    </div>
+    <div class="answers" id="answers" style="margin-top:1rem;"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Página criada para fins educacionais | Unindo conceitos de IA e Prática.</p>
+</footer>
 
 <script>
-    function openTab(tabName) {
-        // Esconder todos os conteúdos
-        const contents = document.querySelectorAll('.content');
-        contents.forEach(content => content.classList.remove('active'));
+  /* --- Lógica das Abas do Tutorial --- */
+  function openTab(tabName) {
+      // Remove classes ativas de conteúdos e abas
+      document.querySelectorAll('.tutorial-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => {
+          t.classList.remove('active-gemini', 'active-chatgpt');
+      });
 
-        // Remover classe ativa das abas
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.classList.remove('active-gemini');
-            tab.classList.remove('active-chatgpt');
-        });
+      // Ativa conteúdo
+      document.getElementById(tabName).classList.add('active');
 
-        // Mostrar o conteúdo selecionado
-        document.getElementById(tabName).classList.add('active');
+      // Ativa estilo da aba
+      const clickedTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
+      if (tabName === 'gemini') {
+          clickedTab.classList.add('active-gemini');
+      } else {
+          clickedTab.classList.add('active-chatgpt');
+      }
+  }
 
-        // Adicionar classe ativa na aba correta
-        const activeTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
-        if (tabName === 'gemini') {
-            activeTab.classList.add('active-gemini');
-        } else {
-            activeTab.classList.add('active-chatgpt');
-        }
+  /* --- Lógica de Cópia (Unificada) --- */
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-target');
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      
+      const text = el.innerText || el.textContent; // Pega texto puro
+      try {
+        await navigator.clipboard.writeText(text);
+        
+        // Feedback visual
+        const originalText = btn.textContent;
+        btn.classList.add('copied');
+        btn.textContent = 'Copiado!';
+        
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        alert('Erro ao copiar. Tente selecionar manualmente.');
+      }
+    });
+  });
+
+  /* --- Lógica do Quiz --- */
+  (function () {
+    const questionBank = [
+      { text: 'O que é IA Generativa?', options: ['IA que só analisa números', 'IA capaz de criar novos conteúdos (texto, imagem)', 'Um robô aspirador', 'Um banco de dados fixo'], correct: 1 },
+      { text: 'Qual o papel do treinamento na IA?', options: ['Limpar o computador', 'Ajustar parâmetros com base em exemplos', 'Criar hardware novo', 'Formatar o texto'], correct: 1 },
+      { text: 'O que é um Prompt?', options: ['O comando dado à IA', 'O nome do processador', 'Um erro de sistema', 'Uma linguagem de programação'], correct: 0 },
+      { text: 'O Gemini é desenvolvido por qual empresa?', options: ['OpenAI', 'Microsoft', 'Google', 'Apple'], correct: 2 },
+      { text: 'O ChatGPT é conhecido por:', options: ['Ser um modelo de linguagem natural', 'Ser apenas um buscador antigo', 'Não entender português', 'Funcionar apenas offline'], correct: 0 },
+      { text: 'O que significa inferência?', options: ['O momento de aprendizado', 'O uso do modelo já treinado para responder', 'Desligar a IA', 'Conectar na internet'], correct: 1 },
+      { text: 'Qual setor usa IA para diagnósticos?', options: ['Saúde', 'Padaria (apenas)', 'Nenhum', 'Setor de Máquinas de Escrever'], correct: 0 }
+    ];
+
+    // Seleciona 5 perguntas aleatórias
+    function getRandomQuestions() {
+        const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 5);
     }
 
-    function copyText(btn) {
-        const text = btn.parentElement.firstChild.textContent.trim();
-        navigator.clipboard.writeText(text).then(() => {
-            const originalText = btn.textContent;
-            btn.textContent = "Copiado!";
-            setTimeout(() => {
-                btn.textContent = originalText;
-            }, 2000);
+    const quizContainer = document.getElementById('quiz-container');
+    const questions = getRandomQuestions();
+
+    // Renderiza
+    questions.forEach((q, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'quiz-question';
+        
+        const title = document.createElement('p');
+        title.innerHTML = `<strong>${index + 1}.</strong> ${q.text}`;
+        qDiv.appendChild(title);
+
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'quiz-options';
+
+        q.options.forEach((opt, i) => {
+            const label = document.createElement('label');
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = `q-${index}`;
+            input.value = i;
+            
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(` ${opt}`));
+            optsDiv.appendChild(label);
         });
-    }
+        
+        qDiv.appendChild(optsDiv);
+        quizContainer.appendChild(qDiv);
+    });
+
+    // Calcular
+    document.getElementById('calc-btn').addEventListener('click', function() {
+        let score = 0;
+        const details = [];
+        
+        questions.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q-${index}"]:checked`);
+            if (selected && parseInt(selected.value) === q.correct) {
+                score++;
+                details.push(`<span class="correct">Q${index+1} ✔</span>`);
+            } else {
+                details.push(`<span class="incorrect">Q${index+1} ✖</span>`);
+            }
+        });
+
+        document.getElementById('score').innerText = `${score} / 5 Acertos`;
+        document.getElementById('answers').innerHTML = details.join(' ');
+        this.disabled = true;
+        this.innerText = "Calculado";
+    });
+  })();
 </script>
 
 </body>
