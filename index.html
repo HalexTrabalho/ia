@@ -481,7 +481,7 @@
   <!-- Seção 5: Quiz -->
   <section id="quiz">
     <h2><span class="icon">✅</span>Quiz Interativo</h2>
-    <p>Teste seu conhecimento sobre IA com 5 perguntas aleatórias.</p>
+    <p>Teste seu conhecimento sobre IA com 10 perguntas. (A cada acesso, algumas mudam!).</p>
     <div id="quiz-container"></div>
     
     <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem;">
@@ -553,19 +553,69 @@
       { text: 'O Gemini é desenvolvido por qual empresa?', options: ['OpenAI', 'Microsoft', 'Google', 'Apple'], correct: 2 },
       { text: 'O ChatGPT é conhecido por:', options: ['Ser um modelo de linguagem natural', 'Ser apenas um buscador antigo', 'Não entender português', 'Funcionar apenas offline'], correct: 0 },
       { text: 'O que significa inferência?', options: ['O momento de aprendizado', 'O uso do modelo já treinado para responder', 'Desligar a IA', 'Conectar na internet'], correct: 1 },
-      { text: 'Qual setor usa IA para diagnósticos?', options: ['Saúde', 'Padaria (apenas)', 'Nenhum', 'Setor de Máquinas de Escrever'], correct: 0 }
+      { text: 'Qual setor usa IA para diagnósticos?', options: ['Saúde', 'Padaria (apenas)', 'Nenhum', 'Setor de Máquinas de Escrever'], correct: 0 },
+      { text: 'O que é Inteligência Artificial em termos gerais?', options: ['Um conjunto de regras fixas', 'Sistemas que realizam tarefas que exigiriam inteligência humana', 'Robôs físicos apenas', 'Programas de xadrez apenas'], correct: 1 },
+      { text: 'Por que dados são importantes para a IA?', options: ['Substituem algoritmos', 'Sem dados o modelo não aprende padrões', 'Para backup apenas', 'Deixam o PC mais rápido'], correct: 1 },
+      { text: 'Qual vantagem de dominar poucas ferramentas de IA?', options: ['Reduz necessidade de programação', 'Gera resultados mais consistentes e aplicáveis', 'Evita erros do modelo', 'Elimina revisão'], correct: 1 },
+      { text: 'Qual destas é uma "Big Tech" focada em IA?', options: ['Microsoft', 'Uma loja local', 'Um blog pessoal', 'Uma fábrica de papel'], correct: 0 },
+      { text: 'Para que serve o @ em prompts?', options: ['Decorar o texto', 'Referenciar arquivos ou conectar ferramentas', 'Aumentar a nota', 'Deixar mais rápido'], correct: 1 },
+      { text: 'A curva de aprendizado da IA moderna tende a ser:', options: ['Linear e lenta', 'Exponencial após certo ponto', 'Decrescente', 'Estática'], correct: 1 },
+      { text: 'Qual o papel do humano ao usar IA?', options: ['Ser substituído totalmente', 'Guiar, validar e aplicar os resultados', 'Não usar tecnologia', 'Apenas imprimir'], correct: 1 },
+      { text: 'Exemplo de IA na educação:', options: ['Tocar música no recreio', 'Gerar planos de aula personalizados', 'Apagar quadro', 'Ligar projetor'], correct: 1 },
+      { text: 'Por que revisar respostas da IA?', options: ['Porque ela nunca erra', 'Porque pode "alucinar" ou ser imprecisa', 'O computador exige', 'Para gastar tempo'], correct: 1 },
+      { text: 'IA ajuda na análise de dados ao:', options: ['Ignorar números', 'Encontrar padrões em grandes volumes', 'Apagar planilhas', 'Somar apenas 1+1'], correct: 1 }
     ];
 
-    // Seleciona 5 perguntas aleatórias
-    function getRandomQuestions() {
-        const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 5);
+    const QUIZ_KEY = 'quiz_data_v2';
+    const TOTAL_QUESTIONS = 10;
+    const SWAP_COUNT = 4; // 40% de 10
+
+    function getRandomQuestions(source, count) {
+        return [...source].sort(() => 0.5 - Math.random()).slice(0, count);
+    }
+
+    function loadOrGenerateQuestions() {
+        let questions = [];
+        const stored = localStorage.getItem(QUIZ_KEY);
+
+        if (stored) {
+            try {
+                questions = JSON.parse(stored);
+            } catch(e) { questions = []; }
+        }
+
+        // Se não houver perguntas salvas ou a quantidade estiver errada (ex: mudou de 5 pra 10)
+        if (!Array.isArray(questions) || questions.length !== TOTAL_QUESTIONS) {
+            questions = getRandomQuestions(questionBank, TOTAL_QUESTIONS);
+        } else {
+            // Lógica de rotação de 40%
+            // 1. Achar quais perguntas do banco NÃO estão no quiz atual
+            const currentTexts = new Set(questions.map(q => q.text));
+            const reserveBank = questionBank.filter(q => !currentTexts.has(q.text));
+
+            // 2. Pegar 4 novas do banco de reserva
+            const safeSwapCount = Math.min(SWAP_COUNT, reserveBank.length);
+            if (safeSwapCount > 0) {
+                const newOnes = getRandomQuestions(reserveBank, safeSwapCount);
+                // Substituir as primeiras N posições (já que depois vamos embaralhar tudo)
+                for(let i=0; i < safeSwapCount; i++) {
+                    questions[i] = newOnes[i];
+                }
+            }
+            
+            // 3. Reembaralhar tudo para as novas não ficarem sempre no topo
+            questions.sort(() => 0.5 - Math.random());
+        }
+
+        localStorage.setItem(QUIZ_KEY, JSON.stringify(questions));
+        return questions;
     }
 
     const quizContainer = document.getElementById('quiz-container');
-    const questions = getRandomQuestions();
+    const questions = loadOrGenerateQuestions();
 
     // Renderiza
+    quizContainer.innerHTML = '';
     questions.forEach((q, index) => {
         const qDiv = document.createElement('div');
         qDiv.className = 'quiz-question';
@@ -594,7 +644,8 @@
     });
 
     // Calcular
-    document.getElementById('calc-btn').addEventListener('click', function() {
+    const calcBtn = document.getElementById('calc-btn');
+    calcBtn.addEventListener('click', function() {
         let score = 0;
         const details = [];
         
@@ -608,10 +659,14 @@
             }
         });
 
-        document.getElementById('score').innerText = `${score} / 5 Acertos`;
+        document.getElementById('score').innerText = `${score} / ${TOTAL_QUESTIONS} Acertos`;
         document.getElementById('answers').innerHTML = details.join(' ');
+        
+        // Desativar botão
         this.disabled = true;
-        this.innerText = "Calculado";
+        this.innerText = "Nota Calculada";
+        this.style.cursor = "default";
+        this.style.opacity = "0.7";
     });
   })();
 </script>
