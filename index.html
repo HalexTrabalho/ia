@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Introdução à IA e Tutoriais Práticos</title>
+  <title>..:: Guia Completo: IA na Prática::..</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
@@ -39,7 +39,7 @@
     header {
       background: linear-gradient(135deg, #4f46e5, #22c55e);
       color: #f9fafb;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       position: sticky;
       top: 0;
@@ -48,14 +48,15 @@
     }
 
     header h1 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
       margin-bottom: 0.75rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     header p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0.95;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
@@ -67,13 +68,13 @@
     }
 
     section {
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.7);
       border-radius: var(--border-radius);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       border: 1px solid rgba(148, 163, 184, 0.1);
       backdrop-filter: blur(12px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
     }
 
     section h2 {
@@ -119,31 +120,43 @@
       font-weight: 600;
     }
 
-    /* --- Tags e Chips --- */
-    .companies-tags, .chips {
+    /* --- Componentes Importados (Chips e Cards Soft) --- */
+    .card-soft {
+      background: rgba(2, 6, 23, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 1rem;
+      font-size: 0.95rem;
+      height: 100%;
+    }
+    
+    .card-soft strong { color: var(--gemini-color); }
+
+    .tools-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.8rem;
       margin-top: 1rem;
     }
 
-    .company-tag, .chip {
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      color: #e2e8f0;
-      display: inline-flex;
-      align-items: center;
+    .tool-chip {
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      background: rgba(30, 41, 59, 0.4);
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      font-weight: 600;
+      flex: 1;
+      min-width: 200px;
     }
 
-    .company-tag span {
-      font-size: 0.75rem;
-      opacity: 0.6;
-      margin-left: 0.4rem;
-      padding-left: 0.4rem;
-      border-left: 1px solid rgba(255,255,255,0.2);
+    .tool-chip span {
+      display: block;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.3rem;
+      font-weight: 400;
     }
 
     /* --- Gráfico --- */
@@ -346,8 +359,8 @@
 <body>
 
 <header>
-  <h1>IA na Prática & Tutoriais</h1>
-  <p>Conceitos fundamentais, exemplos de uso e um tutorial passo a passo para transformar caligrafia com Inteligência Artificial.</p>
+  <h1>IA na Prática & Jornada Aula 2</h1>
+  <p>Conceitos fundamentais, pilares da produtividade, tutoriais de caligrafia e prompts práticos para transformar seu trabalho.</p>
 </header>
 
 <main>
@@ -392,7 +405,50 @@
     </div>
   </section>
 
-  <!-- Seção 3: Tutorial Prático (Novo Conteúdo) -->
+  <!-- Seção 3: Pilares (Do Código Novo) -->
+  <section id="pilares">
+    <h2><span class="icon">🧱</span>Três pilares de IA para o dia a dia</h2>
+    <p>Na Aula 2 da jornada, o foco costuma ser o uso prático das ferramentas principais de IA para produtividade: **ChatGPT**, Gemini e Copilot, integrados ao fluxo de trabalho real.</p>
+    <div class="tools-row">
+      <div class="tool-chip">
+        ChatGPT (OpenAI)
+        <span>Texto, código, resumo, ideias e estudo dirigido.</span>
+      </div>
+      <div class="tool-chip">
+        Gemini (Google)
+        <span>Pesquisa, arquivos, PDFs, imagens e conexão com Google.</span>
+      </div>
+      <div class="tool-chip">
+        Copilot (Microsoft)
+        <span>Integração com Windows, Word, Excel e Teams.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 4: Aplicações Práticas (Do Código Novo) -->
+  <section id="aplicacoes">
+    <h2><span class="icon">💼</span>Aplicações práticas no trabalho</h2>
+    <div class="grid-2">
+      <div class="card-soft">
+        <p><strong>E-mails e textos profissionais</strong></p>
+        <ul>
+          <li>Reescrever textos com tom mais profissional ou didático.</li>
+          <li>Gerar respostas rápidas para clientes e alunos mantendo o contexto. </li>
+          <li>Criar versões diferentes de um mesmo e-mail (curta, média, longa). </li>
+        </ul>
+      </div>
+      <div class="card-soft">
+        <p><strong>Dados, arquivos e reuniões</strong></p>
+        <ul>
+          <li>Resumir PDFs, planilhas e apresentações anexadas à IA.</li>
+          <li>Extrair insights de tabelas e gerar gráficos ou dashboards.  </li>
+          <li>Produzir atas de reunião e planos de ação a partir de transcrições. </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 5: Tutorial Prático Caligrafia -->
   <section id="tutorial-caligrafia" style="border: 1px solid rgba(96, 165, 250, 0.3);">
     <h2><span class="icon">✍️</span>Tutorial: Caligrafia Profissional com IA</h2>
     <p>Aprenda a transformar fotos de cadernos com letra "feia" em resumos esteticamente perfeitos usando o Gemini ou ChatGPT.</p>
@@ -460,28 +516,95 @@
     </div>
   </section>
 
-  <!-- Seção 4: Outros Prompts Úteis -->
+  <!-- Seção 6: Super Banco de Prompts (Combinado) -->
   <section id="prompts">
-    <h2><span class="icon">⌨️</span>Outros Prompts Práticos</h2>
-    <p>Exemplos gerais para professores e profissionais.</p>
+    <h2><span class="icon">⌨️</span>Banco de Prompts Práticos</h2>
+    <p>Coleção completa de prompts para aulas, trabalho e produtividade.</p>
 
+    <!-- Prompts do Arquivo Original -->
     <div class="prompt-box">
-      <div class="prompt-title">Planejamento de Aula</div>
+      <div class="prompt-title">Planejamento de Aula (IA na Educação)</div>
       <button class="copy-btn" data-target="prompt-aula">Copiar</button>
       <div class="prompt-text" id="prompt-aula">Você é um professor especialista em tecnologia. Crie um plano de aula de 1h30 sobre Inteligência Artificial para iniciantes, incluindo: objetivos, tópicos principais, exemplos práticos e 5 exercícios.</div>
     </div>
 
     <div class="prompt-box">
-      <div class="prompt-title">Análise de Dados com @</div>
+      <div class="prompt-title">Análise de Dados com @ (Gemini/Copilot)</div>
       <button class="copy-btn" data-target="prompt-analise">Copiar</button>
       <div class="prompt-text" id="prompt-analise">Analise este arquivo @planilha_resultados e este documento @relatorio. Resuma os principais problemas e crie um plano de ação em 5 passos.</div>
     </div>
+
+    <!-- Prompts do Arquivo Novo -->
+    <div class="prompt-box">
+      <div class="prompt-title">E-mail profissional e educado</div>
+      <button class="copy-btn" data-target="prompt-email">Copiar</button>
+      <div class="prompt-text" id="prompt-email">Você é um assistente especializado em comunicação profissional.
+Reescreva o e-mail abaixo deixando mais claro, direto e educado, mantendo o mesmo sentido.
+Depois, sugira um assunto de e-mail atrativo e profissional.
+
+[E-MAIL ORIGINAL]
+(cole aqui o texto que você já escreveu)</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-title">Resumo de documento longo (PDF/Word)</div>
+      <button class="copy-btn" data-target="prompt-resumo">Copiar</button>
+      <div class="prompt-text" id="prompt-resumo">Você é um analista sênior de negócios.
+Resuma o documento @arquivo_principal em até 10 tópicos objetivos, destacando:
+- principais problemas encontrados
+- oportunidades de melhoria
+- decisões que precisam ser tomadas nos próximos 30 dias.
+
+No final, crie um parágrafo sugerindo próximos passos práticos.</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-title">Roteiro de Reunião</div>
+      <button class="copy-btn" data-target="prompt-reuniao">Copiar</button>
+      <div class="prompt-text" id="prompt-reuniao">Você é um coordenador experiente.
+Crie um roteiro de reunião de 45 minutos para apresentar os resultados da planilha @resultados_2025 usando IA.
+Inclua:
+- objetivos da reunião
+- sequência de tópicos (com tempo estimado)
+- perguntas para engajar a equipe
+- tarefas e responsáveis ao final da reunião.</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-title">Estrutura de Apresentação (Slides)</div>
+      <button class="copy-btn" data-target="prompt-slides">Copiar</button>
+      <div class="prompt-text" id="prompt-slides">Você é um designer de apresentações.
+A partir do texto abaixo, crie uma estrutura de apresentação com até 10 slides, indicando:
+- título de cada slide
+- 3 a 5 tópicos por slide
+- sugestão de imagens ou ícones.
+
+[TEXTO]
+(cole aqui um relatório, artigo ou resumo que você queira transformar em apresentação)</div>
+    </div>
+
+    <div class="prompt-box">
+        <div class="prompt-title">Estudo com IA</div>
+        <button class="copy-btn" data-target="prompt-estudo">Copiar</button>
+        <div class="prompt-text" id="prompt-estudo">Você é um professor de curso técnico.
+Explique o conteúdo abaixo em linguagem simples, como se estivesse dando aula para iniciantes.
+Depois, crie:
+1) 5 perguntas de fixação (sem resposta)
+2) um exercício prático para os alunos aplicarem o conteúdo no trabalho.
+
+[CONTEÚDO]
+(cole aqui um trecho de apostila, norma, lei ou artigo técnico)</div>
+      </div>
+
+    <div class="info-box">
+        <p><strong>Dica de ouro:</strong> Use o <span class="highlight">@</span> para conectar a IA aos seus arquivos reais (se a plataforma permitir), transformando prompts genéricos em soluções específicas.</p>
+    </div>
   </section>
 
-  <!-- Seção 5: Quiz -->
+  <!-- Seção 7: Quiz (Expandido) -->
   <section id="quiz">
-    <h2><span class="icon">✅</span>Quiz Interativo</h2>
-    <p>Teste seu conhecimento sobre IA com 10 perguntas. (A cada acesso, algumas mudam!).</p>
+    <h2><span class="icon">✅</span>Quiz Interativo Unificado</h2>
+    <p>Teste seu conhecimento com 10 perguntas sorteadas de um banco de dados expandido (+30 questões). A cada acesso, novas perguntas podem surgir!</p>
     <div id="quiz-container"></div>
     
     <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem;">
@@ -494,22 +617,17 @@
 </main>
 
 <footer>
-  <p>Página criada para fins educacionais | Unindo conceitos de IA e Prática.</p>
+  <p>Halex System&reg</p>
 </footer>
 
 <script>
   /* --- Lógica das Abas do Tutorial --- */
   function openTab(tabName) {
-      // Remove classes ativas de conteúdos e abas
       document.querySelectorAll('.tutorial-content').forEach(c => c.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => {
           t.classList.remove('active-gemini', 'active-chatgpt');
       });
-
-      // Ativa conteúdo
       document.getElementById(tabName).classList.add('active');
-
-      // Ativa estilo da aba
       const clickedTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
       if (tabName === 'gemini') {
           clickedTab.classList.add('active-gemini');
@@ -524,16 +642,12 @@
       const targetId = btn.getAttribute('data-target');
       const el = document.getElementById(targetId);
       if (!el) return;
-      
-      const text = el.innerText || el.textContent; // Pega texto puro
+      const text = el.innerText || el.textContent;
       try {
         await navigator.clipboard.writeText(text);
-        
-        // Feedback visual
         const originalText = btn.textContent;
         btn.classList.add('copied');
         btn.textContent = 'Copiado!';
-        
         setTimeout(() => {
           btn.classList.remove('copied');
           btn.textContent = originalText;
@@ -544,9 +658,11 @@
     });
   });
 
-  /* --- Lógica do Quiz --- */
+  /* --- Lógica do Quiz (Banco Unificado) --- */
   (function () {
+    // Perguntas Originais + Perguntas da Aula 2
     const questionBank = [
+      // --- Originais ---
       { text: 'O que é IA Generativa?', options: ['IA que só analisa números', 'IA capaz de criar novos conteúdos (texto, imagem)', 'Um robô aspirador', 'Um banco de dados fixo'], correct: 1 },
       { text: 'Qual o papel do treinamento na IA?', options: ['Limpar o computador', 'Ajustar parâmetros com base em exemplos', 'Criar hardware novo', 'Formatar o texto'], correct: 1 },
       { text: 'O que é um Prompt?', options: ['O comando dado à IA', 'O nome do processador', 'Um erro de sistema', 'Uma linguagem de programação'], correct: 0 },
@@ -563,12 +679,26 @@
       { text: 'Qual o papel do humano ao usar IA?', options: ['Ser substituído totalmente', 'Guiar, validar e aplicar os resultados', 'Não usar tecnologia', 'Apenas imprimir'], correct: 1 },
       { text: 'Exemplo de IA na educação:', options: ['Tocar música no recreio', 'Gerar planos de aula personalizados', 'Apagar quadro', 'Ligar projetor'], correct: 1 },
       { text: 'Por que revisar respostas da IA?', options: ['Porque ela nunca erra', 'Porque pode "alucinar" ou ser imprecisa', 'O computador exige', 'Para gastar tempo'], correct: 1 },
-      { text: 'IA ajuda na análise de dados ao:', options: ['Ignorar números', 'Encontrar padrões em grandes volumes', 'Apagar planilhas', 'Somar apenas 1+1'], correct: 1 }
+      { text: 'IA ajuda na análise de dados ao:', options: ['Ignorar números', 'Encontrar padrões em grandes volumes', 'Apagar planilhas', 'Somar apenas 1+1'], correct: 1 },
+      // --- Aula 2 (Novas) ---
+      { text: 'Qual é o foco principal da Aula 2 da jornada de IA?', options: ['Somente teoria abstrata', 'Uso prático de ferramentas como ChatGPT, Gemini e Copilot', 'Apenas Python avançado', 'Robótica física'], correct: 1 },
+      { text: 'Qual das opções NÃO é citada como pilar de IA na aula?', options: ['ChatGPT', 'Gemini', 'Copilot', 'Impressora 3D'], correct: 3 },
+      { text: 'Para que serve usar IA na escrita de e-mails profissionais?', options: ['Enviar spam', 'Deixar o texto mais claro, educado e bem estruturado', 'Apagar mensagens antigas', 'Aumentar anexo'], correct: 1 },
+      { text: 'Por que anexar documentos (PDF, planilhas) à IA é útil?', options: ['A IA precisa de arquivos para ligar', 'Permite que a IA leia o conteúdo real e gere insights', 'Reduz espaço no PC', 'Impede a leitura'], correct: 1 },
+      { text: 'Qual boa prática ao pedir análise de planilha?', options: ['Mandar "me explique" sem contexto', 'Especificar destaques, problemas e gráficos desejados', 'Pedir para apagar dados', 'Enviar para todos os contatos'], correct: 1 },
+      { text: 'Na criação de apresentações com IA, qual a melhor abordagem?', options: ['Pedir "faça qualquer coisa"', 'Fornecer texto base e pedir estrutura de tópicos por slide', 'Enviar slides em branco', 'Usar apenas emojis'], correct: 1 },
+      { text: 'Ao criar um roteiro de reunião com IA, deve-se incluir:', options: ['Nada', 'Objetivos, tópicos, perguntas de engajamento e tarefas', 'Apenas piadas', 'Nenhum contexto'], correct: 1 },
+      { text: 'Qual ferramenta resume e-mails dentro do ambiente Microsoft?', options: ['Copilot', 'Fax', 'Antivírus', 'Scanner'], correct: 0 },
+      { text: 'Qual detalhe ajuda a IA em análise de dados?', options: ['Omitir objetivo', 'Especificar o público-alvo (ex: gestores)', 'Pedir código binário', 'Proibir uso de dados'], correct: 1 },
+      { text: 'Qual o ganho de usar IA para slides?', options: ['Arquivo maior', 'Facilitar comunicação visual e objetividade', 'Eliminar reuniões', 'Esconder resultados'], correct: 1 },
+      { text: 'Uma forma produtiva de usar IA para estudo:', options: ['Pedir para fazer a prova por você', 'Pedir explicação simples, perguntas de fixação e exercícios', 'Traduzir emojis', 'Conversa aleatória'], correct: 1 },
+      { text: 'O que fazer antes de enviar um relatório gerado por IA?', options: ['Enviar sem ler', 'Revisar, ajustar termos e conferir erros', 'Excluir original', 'Traduzir sem necessidade'], correct: 1 },
+      { text: 'O que é valorizado em uma aula de IA para profissionais?', options: ['Decorar datas', 'Exemplos práticos aplicados ao trabalho real', 'Fórmulas matemáticas apenas', 'Teoria sem exemplo'], correct: 1 }
     ];
 
-    const QUIZ_KEY = 'quiz_data_v2';
+    const QUIZ_KEY = 'quiz_combined_v3';
     const TOTAL_QUESTIONS = 10;
-    const SWAP_COUNT = 4; // 40% de 10
+    const SWAP_COUNT = 4; // 40%
 
     function getRandomQuestions(source, count) {
         return [...source].sort(() => 0.5 - Math.random()).slice(0, count);
@@ -579,31 +709,23 @@
         const stored = localStorage.getItem(QUIZ_KEY);
 
         if (stored) {
-            try {
-                questions = JSON.parse(stored);
-            } catch(e) { questions = []; }
+            try { questions = JSON.parse(stored); } catch(e) { questions = []; }
         }
 
-        // Se não houver perguntas salvas ou a quantidade estiver errada (ex: mudou de 5 pra 10)
         if (!Array.isArray(questions) || questions.length !== TOTAL_QUESTIONS) {
             questions = getRandomQuestions(questionBank, TOTAL_QUESTIONS);
         } else {
-            // Lógica de rotação de 40%
-            // 1. Achar quais perguntas do banco NÃO estão no quiz atual
+            // Rotação inteligente
             const currentTexts = new Set(questions.map(q => q.text));
             const reserveBank = questionBank.filter(q => !currentTexts.has(q.text));
 
-            // 2. Pegar 4 novas do banco de reserva
             const safeSwapCount = Math.min(SWAP_COUNT, reserveBank.length);
             if (safeSwapCount > 0) {
                 const newOnes = getRandomQuestions(reserveBank, safeSwapCount);
-                // Substituir as primeiras N posições (já que depois vamos embaralhar tudo)
                 for(let i=0; i < safeSwapCount; i++) {
                     questions[i] = newOnes[i];
                 }
             }
-            
-            // 3. Reembaralhar tudo para as novas não ficarem sempre no topo
             questions.sort(() => 0.5 - Math.random());
         }
 
@@ -662,7 +784,6 @@
         document.getElementById('score').innerText = `${score} / ${TOTAL_QUESTIONS} Acertos`;
         document.getElementById('answers').innerHTML = details.join(' ');
         
-        // Desativar botão
         this.disabled = true;
         this.innerText = "Nota Calculada";
         this.style.cursor = "default";
