@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>..:: Guia Completo: IA na Prática::..</title>
+  <title>..:: Guia Completo: IA na Prática + Automação ::..</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
@@ -10,6 +10,9 @@
       --primary-dark: #3730a3;
       --gemini-color: #60a5fa;
       --chatgpt-color: #4ade80;
+      --gamma-color: #d946ef; /* Cor para Gamma */
+      --lovable-color: #22c55e; /* Cor para Lovable */
+      --n8n-color: #f97316; /* Cor para N8N */
       --bg: #0f172a;
       --bg-soft: #111827;
       --card: #020617;
@@ -37,7 +40,7 @@
 
     /* --- Header --- */
     header {
-      background: linear-gradient(135deg, #4f46e5, #22c55e);
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
       color: #f9fafb;
       padding: 2.5rem 1.5rem;
       text-align: center;
@@ -246,18 +249,21 @@
     }
     .info-box strong { color: #a5b4fc; }
 
-    /* --- Estilos Específicos do Tutorial (Abas) --- */
-    .tutorial-tabs {
+    /* --- Tabs Genéricas --- */
+    .tabs-container {
       display: flex;
+      flex-wrap: wrap;
       background: rgba(0, 0, 0, 0.2);
       border-radius: 8px;
       margin-bottom: 1.5rem;
       padding: 4px;
       border: 1px solid rgba(255,255,255,0.05);
+      gap: 4px;
     }
 
-    .tab {
+    .tab-btn {
       flex: 1;
+      min-width: 100px;
       padding: 12px;
       text-align: center;
       font-weight: 600;
@@ -265,40 +271,33 @@
       border-radius: 6px;
       transition: all 0.3s ease;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
     }
 
-    .tab:hover {
+    .tab-btn:hover {
       background: rgba(255,255,255,0.05);
       color: #fff;
     }
 
-    .tab.active-gemini {
-      background: rgba(37, 99, 235, 0.15);
-      color: var(--gemini-color);
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
-    }
+    /* Estilos ativos específicos */
+    .tab-btn.active.gemini-tab { background: rgba(96, 165, 250, 0.15); color: var(--gemini-color); border-color: rgba(96, 165, 250, 0.3); }
+    .tab-btn.active.chatgpt-tab { background: rgba(74, 222, 128, 0.15); color: var(--chatgpt-color); border-color: rgba(74, 222, 128, 0.3); }
+    .tab-btn.active.gamma-tab { background: rgba(217, 70, 239, 0.15); color: var(--gamma-color); border-color: rgba(217, 70, 239, 0.3); }
+    .tab-btn.active.lovable-tab { background: rgba(34, 197, 94, 0.15); color: var(--lovable-color); border-color: rgba(34, 197, 94, 0.3); }
+    .tab-btn.active.n8n-tab { background: rgba(249, 115, 22, 0.15); color: var(--n8n-color); border-color: rgba(249, 115, 22, 0.3); }
 
-    .tab.active-chatgpt {
-      background: rgba(22, 163, 74, 0.15);
-      color: var(--chatgpt-color);
-      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.3);
-    }
-
-    .tutorial-content {
+    .tab-content {
       display: none;
       animation: fadeIn 0.4s ease-out;
     }
-    .tutorial-content.active { display: block; }
+    .tab-content.active { display: block; }
 
     .step {
       margin-bottom: 1.5rem;
       padding-left: 1.5rem;
       border-left: 3px solid #334155;
     }
-    .highlight-gemini .step { border-left-color: var(--gemini-color); }
-    .highlight-chatgpt .step { border-left-color: var(--chatgpt-color); }
-
     .step-title {
       font-weight: 700;
       font-size: 1.1rem;
@@ -326,23 +325,33 @@
     .quiz-options label:hover {
       background: rgba(255,255,255,0.05);
     }
+    
+    /* Input Radio Custom */
+    .quiz-options input[type="radio"] {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
     .btn {
-      padding: 0.6rem 1.2rem;
+      padding: 0.8rem 2rem;
       border-radius: 999px;
       border: none;
       background: var(--primary);
       color: white;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: all 0.2s;
+      font-size: 1rem;
+      box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
     }
     .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
     
-    .score { margin-left: 1rem; font-weight: bold; color: var(--accent); }
-    .answers span { display: inline-block; margin: 0.2rem; padding: 0.2rem 0.6rem; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 0.85rem; }
-    .correct { color: #4ade80; }
-    .incorrect { color: #f87171; }
+    .score { margin-left: 1rem; font-weight: bold; color: var(--accent); font-size: 1.2rem; }
+    .answers { margin-top: 1rem; line-height: 1.8; }
+    .answers span { display: inline-block; margin: 0.2rem; padding: 0.2rem 0.8rem; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.9rem; }
+    .correct { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); }
+    .incorrect { color: #f87171; border: 1px solid rgba(248, 113, 113, 0.2); }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(5px); }
@@ -353,14 +362,15 @@
       .grid-2 { grid-template-columns: 1fr; }
       header { padding: 1.5rem 1rem; }
       section { padding: 1.2rem; }
+      .tabs-container { overflow-x: auto; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Guia de IA na Prática</h1>
-  <p>Conceitos fundamentais, pilares da produtividade, tutoriais de caligrafia e prompts práticos para transformar seu trabalho.</p>
+  <h1>Guia de IA & Automação</h1>
+  <p>Conceitos fundamentais, pilares da produtividade e as novas ferramentas de automação (Aula 3).</p>
 </header>
 
 <main>
@@ -385,9 +395,8 @@
         <p>Na prática, você conversa com um modelo já treinado e guia o comportamento dele com bons prompts (Engenharia de Prompt).</p>
       </div>
       <div>
-        <!-- Gráfico Visual Simplificado com CSS/HTML para leveza -->
+        <!-- Gráfico Visual Simplificado -->
         <div class="chart-container" style="display:flex; align-items:flex-end; justify-content:space-around; padding-bottom:30px;">
-             <!-- Barras simuladas -->
              <div style="width:10%; height:20%; background:#3730a3; border-radius:4px 4px 0 0;"></div>
              <div style="width:10%; height:35%; background:#4338ca; border-radius:4px 4px 0 0;"></div>
              <div style="width:10%; height:50%; background:#4f46e5; border-radius:4px 4px 0 0;"></div>
@@ -405,10 +414,10 @@
     </div>
   </section>
 
-  <!-- Seção 3: Pilares (Do Código Novo) -->
+  <!-- Seção 3: Pilares -->
   <section id="pilares">
     <h2><span class="icon">🧱</span>Três pilares de IA para o dia a dia</h2>
-    <p>Nesse bloco, o foco será o uso prático das ferramentas principais de IA para produtividade: **ChatGPT**, Gemini e Copilot, integrados ao fluxo de trabalho real.</p>
+    <p>Nesse bloco, o foco será o uso prático das ferramentas principais de IA para produtividade.</p>
     <div class="tools-row">
       <div class="tool-chip">
         ChatGPT (OpenAI)
@@ -425,218 +434,204 @@
     </div>
   </section>
 
-  <!-- Seção 4: Aplicações Práticas (Do Código Novo) -->
-  <section id="aplicacoes">
-    <h2><span class="icon">💼</span>Aplicações práticas no trabalho</h2>
-    <div class="grid-2">
-      <div class="card-soft">
-        <p><strong>E-mails e textos profissionais</strong></p>
-        <ul>
-          <li>Reescrever textos com tom mais profissional ou didático.</li>
-          <li>Gerar respostas rápidas para clientes e alunos mantendo o contexto. </li>
-          <li>Criar versões diferentes de um mesmo e-mail (curta, média, longa). </li>
-        </ul>
-      </div>
-      <div class="card-soft">
-        <p><strong>Dados, arquivos e reuniões</strong></p>
-        <ul>
-          <li>Resumir PDFs, planilhas e apresentações anexadas à IA.</li>
-          <li>Extrair insights de tabelas e gerar gráficos ou dashboards.  </li>
-          <li>Produzir atas de reunião e planos de ação a partir de transcrições. </li>
-        </ul>
-      </div>
+  <!-- Seção NOVO: Aula 3 Automação -->
+  <section id="aula3-automacao" style="border: 1px solid rgba(147, 51, 234, 0.3);">
+    <h2><span class="icon">🚀</span>Automação Inteligente e Agentes</h2>
+    <p>Crie "robôs" e agentes personalizados para realizar tarefas repetitivas e dashboards em segundos.</p>
+
+    <!-- Abas da Aula 3 -->
+    <div class="tabs-container">
+        <div class="tab-btn active gemini-tab" onclick="openToolTab('gemini-gems')">Gemini Gems</div>
+        <div class="tab-btn gamma-tab" onclick="openToolTab('gamma')">Gamma (Slides)</div>
+        <div class="tab-btn lovable-tab" onclick="openToolTab('lovable')">Lovable (Dash)</div>
+        <div class="tab-btn n8n-tab" onclick="openToolTab('n8n')">N8N (Fluxos)</div>
     </div>
+
+    <!-- Conteúdo 1: Gemini Gems -->
+    <div id="gemini-gems" class="tab-content active">
+        <div class="step">
+            <span class="step-title">Agentes Personalizados (Gems)</span>
+            <p>O Google Gemini permite criar "Gems" na versão gratuita. Estes agentes podem ser configurados com instruções específicas e bases de conhecimento.</p>
+        </div>
+        
+        <div class="grid-2">
+            <div>
+                <div class="prompt-box">
+                    <div class="prompt-title">Prompt: Agente Tradutor</div>
+                    <button class="copy-btn" data-target="prompt-translator">Copiar</button>
+                    <div class="prompt-text" id="prompt-translator">Seu trabalho será identificar o idioma do texto informado pelo usuário. Se o usuário informar um texto em português, traduza-o imediatamente para inglês. Se o usuário informar um texto em inglês, traduza-o para português. Apenas traduza, sem conversa fiada.</div>
+                </div>
+            </div>
+            <div>
+                <div class="prompt-box">
+                    <div class="prompt-title">Prompt: Agente de FAQ</div>
+                    <button class="copy-btn" data-target="prompt-faq">Copiar</button>
+                    <div class="prompt-text" id="prompt-faq">Você é um agente que responde às dúvidas que os alunos te enviam. Você só deve responder dúvidas relacionadas à ementa do curso Inteligência Artificial Impressionador. Não responda sobre outros assuntos.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo 2: Gamma -->
+    <div id="gamma" class="tab-content">
+        <div class="step">
+            <span class="step-title">Apresentações em Segundos</span>
+            <p>A ferramenta <strong>Gamma</strong> cria slides completos, com design profissional e conteúdo estruturado, a partir de uma única frase.</p>
+        </div>
+        <div class="prompt-box">
+            <div class="prompt-title">Ideias de Prompts para Slides</div>
+            <button class="copy-btn" data-target="prompt-gamma">Copiar</button>
+            <div class="prompt-text" id="prompt-gamma">Crie uma apresentação sobre o Sistema Solar, focando em curiosidades sobre cada planeta e imagens espaciais.
+Ou:
+Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo de segurança.</div>
+        </div>
+    </div>
+
+    <!-- Conteúdo 3: Lovable -->
+    <div id="lovable" class="tab-content">
+        <div class="step">
+            <span class="step-title">Dashboards e Sites sem Programar</span>
+            <p>O <strong>Lovable</strong> cria aplicações web e dashboards descrevendo o que deseja em linguagem natural.</p>
+        </div>
+        <div class="prompt-box">
+            <div class="prompt-title">Prompt: Dashboard Financeiro</div>
+            <button class="copy-btn" data-target="prompt-lovable">Copiar</button>
+            <div class="prompt-text" id="prompt-lovable">Crie um dashboard interativo que mostre os principais indicadores e gráficos relacionados às finanças de uma empresa de petróleo. Cores: preto e verde neon. Use dados fictícios. Quero a maior quantidade de indicadores e gráficos possível, responsivos a filtros.</div>
+        </div>
+    </div>
+
+    <!-- Conteúdo 4: N8N -->
+    <div id="n8n" class="tab-content">
+        <div class="step">
+            <span class="step-title">Automação Avançada</span>
+            <p>Para automações que conectam apps diferentes (como receber e-mail e responder no WhatsApp), use o <strong>N8N</strong>. Ele permite criar fluxos de trabalho complexos integrando diversas ferramentas.</p>
+        </div>
+        <div class="info-box">
+            <strong>Dica:</strong> O N8N funciona como um "canivete suíço" para conectar APIs sem precisar escrever código complexo.
+        </div>
+    </div>
+
   </section>
 
-  <!-- Seção 5: Tutorial Prático Caligrafia -->
+  <!-- Seção 5: Tutorial Prático Caligrafia (Original) -->
   <section id="tutorial-caligrafia" style="border: 1px solid rgba(96, 165, 250, 0.3);">
-    <h2><span class="icon">✍️</span>Tutorial: Caligrafia Profissional com IA</h2>
-    <p>Aprenda a transformar fotos de cadernos com letra "feia" em resumos esteticamente perfeitos usando o Gemini ou ChatGPT.</p>
+    <h2><span class="icon">✍️</span>Tutorial: Caligrafia Profissional</h2>
+    <p>Transforme fotos de cadernos com letra "feia" em resumos perfeitos.</p>
     
-    <div class="tutorial-tabs">
-        <div class="tab active-gemini" onclick="openTab('gemini')">Usando Gemini (Google)</div>
-        <div class="tab" onclick="openTab('chatgpt')">Usando ChatGPT (OpenAI)</div>
+    <div class="tabs-container">
+        <div class="tab-btn active gemini-tab" onclick="openHandwritingTab('gemini-hw')">Usando Gemini</div>
+        <div class="tab-btn chatgpt-tab" onclick="openHandwritingTab('chatgpt-hw')">Usando ChatGPT</div>
     </div>
 
-    <!-- Conteúdo Gemini -->
-    <div id="gemini" class="tutorial-content active highlight-gemini">
+    <div id="gemini-hw" class="hw-content active">
         <div class="step">
             <span class="step-title">1. Enviar o Material</span>
-            <p>No Gemini, clique no ícone de <strong>+ (Adicionar)</strong> e faça o upload da foto do seu caderno ou arquivo PDF que deseja resumir.</p>
+            <p>No Gemini, faça o upload da foto do caderno ou PDF.</p>
         </div>
-
-        <div class="step">
-            <span class="step-title">2. Transformar em Texto</span>
-            <div class="prompt-box">
-                <div class="prompt-title">Prompt de Texto</div>
-                <button class="copy-btn" data-target="p-gemini-1">Copiar</button>
-                <div class="prompt-text" id="p-gemini-1">Reescreva isso em anotações de estudo claras e concisas para as provas.</div>
-            </div>
-        </div>
-
-        <div class="step">
-            <span class="step-title">3. Gerar a Imagem do Caderno</span>
-            <p>Após a IA gerar o texto, peça para criar a imagem simulando um caderno:</p>
-            <div class="prompt-box">
-                <div class="prompt-title">Prompt de Imagem</div>
-                <button class="copy-btn" data-target="p-gemini-2">Copiar</button>
-                <div class="prompt-text" id="p-gemini-2">Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).</div>
-            </div>
+        <div class="prompt-box">
+            <div class="prompt-title">Prompt de Imagem</div>
+            <button class="copy-btn" data-target="p-gemini-2">Copiar</button>
+            <div class="prompt-text" id="p-gemini-2">Crie um resumo manuscrito sobre [INSIRA TÓPICO]. Use fonte caligrafia estudantil em papel pautado, marcador amarelo neon e circule datas em vermelho. Folha A4 vertical.</div>
         </div>
     </div>
 
-    <!-- Conteúdo ChatGPT -->
-    <div id="chatgpt" class="tutorial-content highlight-chatgpt">
+    <div id="chatgpt-hw" class="hw-content" style="display:none; animation: fadeIn 0.4s;">
         <div class="step">
             <span class="step-title">1. Enviar o Material</span>
-            <p>No ChatGPT, use o ícone de <strong>clipe</strong> para anexar sua imagem ou PDF.</p>
+            <p>No ChatGPT, anexe sua imagem ou PDF.</p>
         </div>
-
-        <div class="step">
-            <span class="step-title">2. Transformar em Texto</span>
-            <div class="prompt-box">
-                <div class="prompt-title">Prompt de Texto</div>
-                <button class="copy-btn" data-target="p-gpt-1">Copiar</button>
-                <div class="prompt-text" id="p-gpt-1">Reescreva isso em anotações de estudo claras e concisas para as provas.</div>
-            </div>
+        <div class="prompt-box">
+            <div class="prompt-title">Prompt de Imagem</div>
+            <button class="copy-btn" data-target="p-gpt-2">Copiar</button>
+            <div class="prompt-text" id="p-gpt-2">Crie um resumo manuscrito sobre [INSIRA TÓPICO]. Use fonte caligrafia estudantil em papel pautado, marcador amarelo neon e circule datas em vermelho. Folha A4 vertical.</div>
         </div>
-
-        <div class="step">
-            <span class="step-title">3. Gerar a Imagem (DALL-E)</span>
-            <div class="prompt-box">
-                <div class="prompt-title">Prompt de Imagem</div>
-                <button class="copy-btn" data-target="p-gpt-2">Copiar</button>
-                <div class="prompt-text" id="p-gpt-2">Crie um resumo manuscrito sobre [INSIRA SEU TÓPICO AQUI]. Use uma fonte de caligrafia estudantil em papel pautado. Use o marcador amarelo neon para destacar os termos importantes para revisão e circule datas importantes em vermelho. Adicione pequenos desenhos para explicar melhor os conceitos. Em uma folha A4 (vertical).</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="info-box">
-        <strong>Nota:</strong> A geração de imagens requer versões avançadas (Gemini Advanced ou ChatGPT Plus/4o). Não se esqueça de substituir <em>[INSIRA SEU TÓPICO AQUI]</em> pelo assunto real. <br><small>Créditos do método: Canal Onde eu Clico.</small>
     </div>
   </section>
 
-  <!-- Seção 6: Super Banco de Prompts (Combinado) -->
+  <!-- Seção 6: Super Banco de Prompts -->
   <section id="prompts">
     <h2><span class="icon">⌨️</span>Banco de Prompts Práticos</h2>
-    <p>Coleção completa de prompts para aulas, trabalho e produtividade.</p>
+    
+    <div class="grid-2">
+        <div class="prompt-box">
+            <div class="prompt-title">Planejamento de Aula</div>
+            <button class="copy-btn" data-target="prompt-aula">Copiar</button>
+            <div class="prompt-text" id="prompt-aula">Você é um professor especialista em tecnologia. Crie um plano de aula de 1h30 sobre Inteligência Artificial para iniciantes, incluindo: objetivos, tópicos, exemplos práticos e 5 exercícios.</div>
+        </div>
 
-    <!-- Prompts do Arquivo Original -->
-    <div class="prompt-box">
-      <div class="prompt-title">Planejamento de Aula (IA na Educação)</div>
-      <button class="copy-btn" data-target="prompt-aula">Copiar</button>
-      <div class="prompt-text" id="prompt-aula">Você é um professor especialista em tecnologia. Crie um plano de aula de 1h30 sobre Inteligência Artificial para iniciantes, incluindo: objetivos, tópicos principais, exemplos práticos e 5 exercícios.</div>
-    </div>
-
-    <div class="prompt-box">
-      <div class="prompt-title">Análise de Dados com @ (Gemini/Copilot)</div>
-      <button class="copy-btn" data-target="prompt-analise">Copiar</button>
-      <div class="prompt-text" id="prompt-analise">Analise este arquivo @planilha_resultados e este documento @relatorio. Resuma os principais problemas e crie um plano de ação em 5 passos.</div>
-    </div>
-
-    <!-- Prompts do Arquivo Novo -->
-    <div class="prompt-box">
-      <div class="prompt-title">E-mail profissional e educado</div>
-      <button class="copy-btn" data-target="prompt-email">Copiar</button>
-      <div class="prompt-text" id="prompt-email">Você é um assistente especializado em comunicação profissional.
-Reescreva o e-mail abaixo deixando mais claro, direto e educado, mantendo o mesmo sentido.
-Depois, sugira um assunto de e-mail atrativo e profissional.
-
+        <div class="prompt-box">
+            <div class="prompt-title">E-mail profissional</div>
+            <button class="copy-btn" data-target="prompt-email">Copiar</button>
+            <div class="prompt-text" id="prompt-email">Reescreva o e-mail abaixo deixando mais claro, direto e educado. Sugira um assunto profissional.
 [E-MAIL ORIGINAL]
-(cole aqui o texto que você já escreveu)</div>
+(cole aqui)</div>
+        </div>
     </div>
-
-    <div class="prompt-box">
-      <div class="prompt-title">Resumo de documento longo (PDF/Word)</div>
-      <button class="copy-btn" data-target="prompt-resumo">Copiar</button>
-      <div class="prompt-text" id="prompt-resumo">Você é um analista sênior de negócios.
-Resuma o documento @arquivo_principal em até 10 tópicos objetivos, destacando:
-- principais problemas encontrados
-- oportunidades de melhoria
-- decisões que precisam ser tomadas nos próximos 30 dias.
-
-No final, crie um parágrafo sugerindo próximos passos práticos.</div>
-    </div>
-
-    <div class="prompt-box">
-      <div class="prompt-title">Roteiro de Reunião</div>
-      <button class="copy-btn" data-target="prompt-reuniao">Copiar</button>
-      <div class="prompt-text" id="prompt-reuniao">Você é um coordenador experiente.
-Crie um roteiro de reunião de 45 minutos para apresentar os resultados da planilha @resultados_2025 usando IA.
-Inclua:
-- objetivos da reunião
-- sequência de tópicos (com tempo estimado)
-- perguntas para engajar a equipe
-- tarefas e responsáveis ao final da reunião.</div>
-    </div>
-
-    <div class="prompt-box">
-      <div class="prompt-title">Estrutura de Apresentação (Slides)</div>
-      <button class="copy-btn" data-target="prompt-slides">Copiar</button>
-      <div class="prompt-text" id="prompt-slides">Você é um designer de apresentações.
-A partir do texto abaixo, crie uma estrutura de apresentação com até 10 slides, indicando:
-- título de cada slide
-- 3 a 5 tópicos por slide
-- sugestão de imagens ou ícones.
-
-[TEXTO]
-(cole aqui um relatório, artigo ou resumo que você queira transformar em apresentação)</div>
-    </div>
-
-    <div class="prompt-box">
-        <div class="prompt-title">Estudo com IA</div>
-        <button class="copy-btn" data-target="prompt-estudo">Copiar</button>
-        <div class="prompt-text" id="prompt-estudo">Você é um professor de curso técnico.
-Explique o conteúdo abaixo em linguagem simples, como se estivesse dando aula para iniciantes.
-Depois, crie:
-1) 5 perguntas de fixação (sem resposta)
-2) um exercício prático para os alunos aplicarem o conteúdo no trabalho.
-
-[CONTEÚDO]
-(cole aqui um trecho de apostila, norma, lei ou artigo técnico)</div>
-      </div>
-
+    
     <div class="info-box">
-        <p><strong>Dica de ouro:</strong> Use o <span class="highlight">@</span> para conectar a IA aos seus arquivos reais (se a plataforma permitir), transformando prompts genéricos em soluções específicas.</p>
+        <p><strong>Dica de ouro:</strong> Use o <span class="highlight">@</span> para conectar a IA aos seus arquivos reais.</p>
     </div>
   </section>
 
   <!-- Seção 7: Quiz (Expandido) -->
   <section id="quiz">
-    <h2><span class="icon">✅</span>Quiz Interativo Unificado</h2>
-    <p>Teste seu conhecimento com 10 perguntas sorteadas de um banco de dados expandido (+30 questões). A cada acesso, novas perguntas podem surgir!</p>
+    <h2><span class="icon">✅</span>Quiz de Conhecimentos (IA + Automação)</h2>
+    <p>Teste seu conhecimento com 10 perguntas sorteadas do nosso banco de dados expandido.</p>
     <div id="quiz-container"></div>
     
-    <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem;">
+    <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap: wrap;">
         <button id="calc-btn" class="btn">Calcular Nota</button>
         <span class="score" id="score"></span>
+        <button onclick="location.reload()" style="background:transparent; border:1px solid #666; color:#aaa; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; font-size:0.8rem;">Novas Perguntas ↻</button>
     </div>
-    <div class="answers" id="answers" style="margin-top:1rem;"></div>
+    <div class="answers" id="answers"></div>
   </section>
 
 </main>
 
 <footer>
-  <p>Halex System&reg</p>
+  <p>Halex System&reg - 2026</p>
 </footer>
 
 <script>
-  /* --- Lógica das Abas do Tutorial --- */
-  function openTab(tabName) {
-      document.querySelectorAll('.tutorial-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.tab').forEach(t => {
-          t.classList.remove('active-gemini', 'active-chatgpt');
-      });
-      document.getElementById(tabName).classList.add('active');
-      const clickedTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
-      if (tabName === 'gemini') {
-          clickedTab.classList.add('active-gemini');
-      } else {
-          clickedTab.classList.add('active-chatgpt');
-      }
+  /* --- Tabs de Automação (Aula 3) --- */
+  function openToolTab(toolId) {
+    // Esconder todos os conteúdos deste grupo
+    const contents = document.querySelectorAll('#aula3-automacao .tab-content');
+    contents.forEach(c => c.classList.remove('active'));
+    
+    // Remover classe active dos botões
+    const buttons = document.querySelectorAll('#aula3-automacao .tab-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+
+    // Ativar o selecionado
+    document.getElementById(toolId).classList.add('active');
+    
+    // Encontrar o botão clicado (gambiarra segura via evento onclick)
+    const activeBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(toolId));
+    if(activeBtn) activeBtn.classList.add('active');
   }
 
-  /* --- Lógica de Cópia (Unificada) --- */
+  /* --- Tabs de Caligrafia (Original) --- */
+  function openHandwritingTab(tabId) {
+    const contents = document.querySelectorAll('.hw-content');
+    contents.forEach(c => {
+        c.style.display = 'none';
+        c.classList.remove('active');
+    });
+
+    const buttons = document.querySelectorAll('#tutorial-caligrafia .tab-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+
+    const selected = document.getElementById(tabId);
+    selected.style.display = 'block';
+    selected.classList.add('active');
+
+    const activeBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(tabId));
+    if(activeBtn) activeBtn.classList.add('active');
+  }
+
+  /* --- Copiar Prompt --- */
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const targetId = btn.getAttribute('data-target');
@@ -653,142 +648,156 @@ Depois, crie:
           btn.textContent = originalText;
         }, 2000);
       } catch (err) {
-        alert('Erro ao copiar. Tente selecionar manualmente.');
+        // Fallback antigo
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Copiado!');
       }
     });
   });
 
-  /* --- Lógica do Quiz (Banco Unificado) --- */
+  /* --- Quiz Logic (Expandido) --- */
   (function () {
-    // Perguntas Originais + Perguntas da Aula 2
-    const questionBank = [
-      // --- Originais ---
-      { text: 'O que é IA Generativa?', options: ['IA que só analisa números', 'IA capaz de criar novos conteúdos (texto, imagem)', 'Um robô aspirador', 'Um banco de dados fixo'], correct: 1 },
-      { text: 'Qual o papel do treinamento na IA?', options: ['Limpar o computador', 'Ajustar parâmetros com base em exemplos', 'Criar hardware novo', 'Formatar o texto'], correct: 1 },
-      { text: 'O que é um Prompt?', options: ['O comando dado à IA', 'O nome do processador', 'Um erro de sistema', 'Uma linguagem de programação'], correct: 0 },
-      { text: 'O Gemini é desenvolvido por qual empresa?', options: ['OpenAI', 'Microsoft', 'Google', 'Apple'], correct: 2 },
-      { text: 'O ChatGPT é conhecido por:', options: ['Ser um modelo de linguagem natural', 'Ser apenas um buscador antigo', 'Não entender português', 'Funcionar apenas offline'], correct: 0 },
-      { text: 'O que significa inferência?', options: ['O momento de aprendizado', 'O uso do modelo já treinado para responder', 'Desligar a IA', 'Conectar na internet'], correct: 1 },
-      { text: 'Qual setor usa IA para diagnósticos?', options: ['Saúde', 'Padaria (apenas)', 'Nenhum', 'Setor de Máquinas de Escrever'], correct: 0 },
-      { text: 'O que é Inteligência Artificial em termos gerais?', options: ['Um conjunto de regras fixas', 'Sistemas que realizam tarefas que exigiriam inteligência humana', 'Robôs físicos apenas', 'Programas de xadrez apenas'], correct: 1 },
-      { text: 'Por que dados são importantes para a IA?', options: ['Substituem algoritmos', 'Sem dados o modelo não aprende padrões', 'Para backup apenas', 'Deixam o PC mais rápido'], correct: 1 },
-      { text: 'Qual vantagem de dominar poucas ferramentas de IA?', options: ['Reduz necessidade de programação', 'Gera resultados mais consistentes e aplicáveis', 'Evita erros do modelo', 'Elimina revisão'], correct: 1 },
-      { text: 'Qual destas é uma "Big Tech" focada em IA?', options: ['Microsoft', 'Uma loja local', 'Um blog pessoal', 'Uma fábrica de papel'], correct: 0 },
-      { text: 'Para que serve o @ em prompts?', options: ['Decorar o texto', 'Referenciar arquivos ou conectar ferramentas', 'Aumentar a nota', 'Deixar mais rápido'], correct: 1 },
-      { text: 'A curva de aprendizado da IA moderna tende a ser:', options: ['Linear e lenta', 'Exponencial após certo ponto', 'Decrescente', 'Estática'], correct: 1 },
-      { text: 'Qual o papel do humano ao usar IA?', options: ['Ser substituído totalmente', 'Guiar, validar e aplicar os resultados', 'Não usar tecnologia', 'Apenas imprimir'], correct: 1 },
-      { text: 'Exemplo de IA na educação:', options: ['Tocar música no recreio', 'Gerar planos de aula personalizados', 'Apagar quadro', 'Ligar projetor'], correct: 1 },
-      { text: 'Por que revisar respostas da IA?', options: ['Porque ela nunca erra', 'Porque pode "alucinar" ou ser imprecisa', 'O computador exige', 'Para gastar tempo'], correct: 1 },
-      { text: 'IA ajuda na análise de dados ao:', options: ['Ignorar números', 'Encontrar padrões em grandes volumes', 'Apagar planilhas', 'Somar apenas 1+1'], correct: 1 },
-      // --- Aula 2 (Novas) ---
-      { text: 'Qual é o foco principal da Aula 2 da jornada de IA?', options: ['Somente teoria abstrata', 'Uso prático de ferramentas como ChatGPT, Gemini e Copilot', 'Apenas Python avançado', 'Robótica física'], correct: 1 },
-      { text: 'Qual das opções NÃO é citada como pilar de IA na aula?', options: ['ChatGPT', 'Gemini', 'Copilot', 'Impressora 3D'], correct: 3 },
-      { text: 'Para que serve usar IA na escrita de e-mails profissionais?', options: ['Enviar spam', 'Deixar o texto mais claro, educado e bem estruturado', 'Apagar mensagens antigas', 'Aumentar anexo'], correct: 1 },
-      { text: 'Por que anexar documentos (PDF, planilhas) à IA é útil?', options: ['A IA precisa de arquivos para ligar', 'Permite que a IA leia o conteúdo real e gere insights', 'Reduz espaço no PC', 'Impede a leitura'], correct: 1 },
-      { text: 'Qual boa prática ao pedir análise de planilha?', options: ['Mandar "me explique" sem contexto', 'Especificar destaques, problemas e gráficos desejados', 'Pedir para apagar dados', 'Enviar para todos os contatos'], correct: 1 },
-      { text: 'Na criação de apresentações com IA, qual a melhor abordagem?', options: ['Pedir "faça qualquer coisa"', 'Fornecer texto base e pedir estrutura de tópicos por slide', 'Enviar slides em branco', 'Usar apenas emojis'], correct: 1 },
-      { text: 'Ao criar um roteiro de reunião com IA, deve-se incluir:', options: ['Nada', 'Objetivos, tópicos, perguntas de engajamento e tarefas', 'Apenas piadas', 'Nenhum contexto'], correct: 1 },
-      { text: 'Qual ferramenta resume e-mails dentro do ambiente Microsoft?', options: ['Copilot', 'Fax', 'Antivírus', 'Scanner'], correct: 0 },
-      { text: 'Qual detalhe ajuda a IA em análise de dados?', options: ['Omitir objetivo', 'Especificar o público-alvo (ex: gestores)', 'Pedir código binário', 'Proibir uso de dados'], correct: 1 },
-      { text: 'Qual o ganho de usar IA para slides?', options: ['Arquivo maior', 'Facilitar comunicação visual e objetividade', 'Eliminar reuniões', 'Esconder resultados'], correct: 1 },
-      { text: 'Uma forma produtiva de usar IA para estudo:', options: ['Pedir para fazer a prova por você', 'Pedir explicação simples, perguntas de fixação e exercícios', 'Traduzir emojis', 'Conversa aleatória'], correct: 1 },
-      { text: 'O que fazer antes de enviar um relatório gerado por IA?', options: ['Enviar sem ler', 'Revisar, ajustar termos e conferir erros', 'Excluir original', 'Traduzir sem necessidade'], correct: 1 },
-      { text: 'O que é valorizado em uma aula de IA para profissionais?', options: ['Decorar datas', 'Exemplos práticos aplicados ao trabalho real', 'Fórmulas matemáticas apenas', 'Teoria sem exemplo'], correct: 1 }
+    // Banco Completo (Geral + Aula 3)
+    const fullQuestionBank = [
+      // -- GERAIS --
+      { text: 'O que é IA Generativa?', options: ['IA que só analisa números', 'IA capaz de criar conteúdo novo', 'Um robô aspirador', 'Banco de dados fixo'], correct: 1 },
+      { text: 'Qual o papel do treinamento na IA?', options: ['Limpar cache', 'Ajustar parâmetros com exemplos', 'Criar hardware', 'Formatar texto'], correct: 1 },
+      { text: 'O que é um Prompt?', options: ['O comando dado à IA', 'O nome do processador', 'Um erro de sistema', 'Uma linguagem antiga'], correct: 0 },
+      { text: 'Gemini é de qual empresa?', options: ['OpenAI', 'Microsoft', 'Google', 'Apple'], correct: 2 },
+      { text: 'O ChatGPT é:', options: ['Modelo de linguagem natural', 'Buscador offline', 'Vírus', 'Planilha'], correct: 0 },
+      { text: 'O que é inferência?', options: ['Treinamento', 'Uso do modelo já treinado', 'Desligar a IA', 'Conectar internet'], correct: 1 },
+      { text: 'Setor que usa IA para diagnósticos:', options: ['Saúde', 'Padaria', 'Nenhum', 'Máquinas de escrever'], correct: 0 },
+      { text: 'Para que serve o @ em prompts?', options: ['Decorar', 'Referenciar arquivos/ferramentas', 'Aumentar nota', 'Deixar lento'], correct: 1 },
+      { text: 'Curva de aprendizado da IA moderna:', options: ['Linear', 'Exponencial', 'Decrescente', 'Estática'], correct: 1 },
+      { text: 'Papel do humano com IA:', options: ['Ser substituído', 'Guiar e validar', 'Não usar', 'Imprimir tudo'], correct: 1 },
+      // -- AULA 3 (AUTOMAÇÃO) --
+      { text: 'Qual ferramenta cria slides em segundos?', options: ['PowerPoint', 'Gamma', 'Canva', 'Excel'], correct: 1 },
+      { text: 'Como o Google Gemini chama seus agentes?', options: ['Bots', 'Assistentes', 'Gems', 'Plugins'], correct: 2 },
+      { text: 'É possível criar Gems na versão gratuita?', options: ['Sim', 'Não', 'Só para empresas', 'Sim, mas não salva'], correct: 0 },
+      { text: 'Para que serve o Lovable?', options: ['Editar vídeo', 'Criar Dashboards e Sites', 'Traduzir', 'E-mail'], correct: 1 },
+      { text: 'Ferramenta para fluxos complexos (Zapier/Integração):', options: ['Gamma', 'N8N', 'Lovable', 'Trello'], correct: 1 },
+      { text: 'O que o agente tradutor NÃO deve fazer?', options: ['Traduzir', 'Conversar ou dar opinião', 'Usar inglês', 'Ser rápido'], correct: 1 },
+      { text: 'Cores do Dashboard da aula:', options: ['Azul/Branco', 'Vermelho/Preto', 'Preto/Verde Neon', 'Cinza'], correct: 2 },
+      { text: 'Para criar um agente especialista, você fornece:', options: ['Foto', 'Instruções e Base de Conhecimento', 'Link YouTube', 'Nada'], correct: 1 },
+      { text: 'O Gamma exporta para:', options: ['Apenas PDF', 'Apenas Imagem', 'PDF e PowerPoint', 'Word'], correct: 2 },
+      { text: 'O Lovable exige saber código?', options: ['Sim, Python', 'Sim, HTML', 'Não, usa linguagem natural', 'Sim, C++'], correct: 2 },
+      // -- EXTRAS --
+      { text: 'O que significa N8N?', options: ['Nada', 'Ferramenta de automação de nós', 'Novo modelo IA', 'Canal TV'], correct: 1 },
+      { text: 'Quantos slides o Gamma cria rápido?', options: ['1', 'Apresentação completa', 'Nenhum', '5'], correct: 1 },
+      { text: 'Nome do agente de exemplo da aula:', options: ['FredBot', 'Talia', 'Carol', 'GeminiHelp'], correct: 1 },
+      { text: 'Benefício da automação:', options: ['Substituir humanos', 'Produtividade e tempo', 'Gastar energia', 'Complicar'], correct: 1 },
+      { text: 'Agente "GPT" é de qual IA?', options: ['Gemini', 'ChatGPT', 'Claude', 'Llama'], correct: 1 }
     ];
 
-    const QUIZ_KEY = 'quiz_combined_v3';
-    const TOTAL_QUESTIONS = 10;
-    const SWAP_COUNT = 4; // 40%
+    const STORAGE_KEY = 'quiz_data_v4';
+    const QUIZ_SIZE = 10;
+    const REPLACE_COUNT = 4; // Trocar 4 (40%)
 
-    function getRandomQuestions(source, count) {
-        return [...source].sort(() => 0.5 - Math.random()).slice(0, count);
+    // Função para embaralhar array
+    function shuffle(array) {
+        return array.sort(() => 0.5 - Math.random());
     }
 
-    function loadOrGenerateQuestions() {
-        let questions = [];
-        const stored = localStorage.getItem(QUIZ_KEY);
+    // Carregar ou Gerar Perguntas
+    function getSessionQuestions() {
+        let currentSet = [];
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) currentSet = JSON.parse(saved);
+        } catch(e) {}
 
-        if (stored) {
-            try { questions = JSON.parse(stored); } catch(e) { questions = []; }
+        // Se não existir ou tamanho errado, cria novo do zero
+        if (!currentSet || currentSet.length !== QUIZ_SIZE) {
+            return shuffle([...fullQuestionBank]).slice(0, QUIZ_SIZE);
         }
 
-        if (!Array.isArray(questions) || questions.length !== TOTAL_QUESTIONS) {
-            questions = getRandomQuestions(questionBank, TOTAL_QUESTIONS);
-        } else {
-            // Rotação inteligente
-            const currentTexts = new Set(questions.map(q => q.text));
-            const reserveBank = questionBank.filter(q => !currentTexts.has(q.text));
-
-            const safeSwapCount = Math.min(SWAP_COUNT, reserveBank.length);
-            if (safeSwapCount > 0) {
-                const newOnes = getRandomQuestions(reserveBank, safeSwapCount);
-                for(let i=0; i < safeSwapCount; i++) {
-                    questions[i] = newOnes[i];
-                }
-            }
-            questions.sort(() => 0.5 - Math.random());
-        }
-
-        localStorage.setItem(QUIZ_KEY, JSON.stringify(questions));
-        return questions;
-    }
-
-    const quizContainer = document.getElementById('quiz-container');
-    const questions = loadOrGenerateQuestions();
-
-    // Renderiza
-    quizContainer.innerHTML = '';
-    questions.forEach((q, index) => {
-        const qDiv = document.createElement('div');
-        qDiv.className = 'quiz-question';
+        // Se já existe, aplica a regra dos 40% (trocar 4 perguntas)
+        // 1. Identificar perguntas atuais
+        const currentTexts = new Set(currentSet.map(q => q.text));
         
-        const title = document.createElement('p');
-        title.innerHTML = `<strong>${index + 1}.</strong> ${q.text}`;
-        qDiv.appendChild(title);
+        // 2. Pegar banco de reserva (perguntas que NÃO estão no set atual)
+        const reserve = fullQuestionBank.filter(q => !currentTexts.has(q.text));
+        
+        // Se a reserva for pequena, apenas embaralha tudo de novo
+        if (reserve.length < REPLACE_COUNT) {
+            return shuffle([...fullQuestionBank]).slice(0, QUIZ_SIZE);
+        }
+
+        // 3. Manter 6 (60%) e trocar 4 (40%)
+        const keep = shuffle(currentSet).slice(0, QUIZ_SIZE - REPLACE_COUNT);
+        const newOnes = shuffle(reserve).slice(0, REPLACE_COUNT);
+        
+        const finalSet = shuffle([...keep, ...newOnes]);
+        return finalSet;
+    }
+
+    // Inicialização
+    const questions = getSessionQuestions();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(questions)); // Salva para a próxima "refresh" ter base de troca
+
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    questions.forEach((q, idx) => {
+        // Embaralhar opções para não decorar posição
+        const optionsWithIndex = q.options.map((opt, originalIdx) => ({ txt: opt, idx: originalIdx }));
+        const shuffledOpts = shuffle(optionsWithIndex);
+
+        const card = document.createElement('div');
+        card.className = 'quiz-question';
+        card.innerHTML = `<p><strong>${idx + 1}.</strong> ${q.text}</p>`;
 
         const optsDiv = document.createElement('div');
         optsDiv.className = 'quiz-options';
-
-        q.options.forEach((opt, i) => {
+        
+        shuffledOpts.forEach(optObj => {
             const label = document.createElement('label');
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.name = `q-${index}`;
-            input.value = i;
-            
-            label.appendChild(input);
-            label.appendChild(document.createTextNode(` ${opt}`));
+            label.innerHTML = `<input type="radio" name="q_${idx}" value="${optObj.idx}"> ${optObj.txt}`;
             optsDiv.appendChild(label);
         });
-        
-        qDiv.appendChild(optsDiv);
-        quizContainer.appendChild(qDiv);
+
+        card.appendChild(optsDiv);
+        container.appendChild(card);
     });
 
-    // Calcular
-    const calcBtn = document.getElementById('calc-btn');
-    calcBtn.addEventListener('click', function() {
+    // Evento Calcular
+    const btn = document.getElementById('calc-btn');
+    btn.addEventListener('click', () => {
         let score = 0;
-        const details = [];
-        
-        questions.forEach((q, index) => {
-            const selected = document.querySelector(`input[name="q-${index}"]:checked`);
-            if (selected && parseInt(selected.value) === q.correct) {
-                score++;
-                details.push(`<span class="correct">Q${index+1} ✔</span>`);
-            } else {
-                details.push(`<span class="incorrect">Q${index+1} ✖</span>`);
-            }
+        let feedbackHTML = '';
+
+        questions.forEach((q, idx) => {
+            const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+            const isCorrect = selected && parseInt(selected.value) === q.correct;
+            
+            if (isCorrect) score++;
+            
+            feedbackHTML += isCorrect 
+                ? `<span class="correct">Q${idx+1} ✔</span>` 
+                : `<span class="incorrect">Q${idx+1} ✖</span>`;
+            
+            // Desabilitar inputs
+            document.querySelectorAll(`input[name="q_${idx}"]`).forEach(inp => inp.disabled = true);
         });
 
-        document.getElementById('score').innerText = `${score} / ${TOTAL_QUESTIONS} Acertos`;
-        document.getElementById('answers').innerHTML = details.join(' ');
+        const scoreEl = document.getElementById('score');
+        scoreEl.textContent = `${score} / ${QUIZ_SIZE} Acertos`;
         
-        this.disabled = true;
-        this.innerText = "Nota Calculada";
-        this.style.cursor = "default";
-        this.style.opacity = "0.7";
+        const answersEl = document.getElementById('answers');
+        answersEl.innerHTML = feedbackHTML;
+        
+        // Inativar botão
+        btn.disabled = true;
+        btn.textContent = 'Resultado Calculado';
+        btn.style.opacity = '0.6';
+        btn.style.cursor = 'default';
     });
+
   })();
 </script>
 
