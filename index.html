@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>..:: Guia Completo: IA na Prática + Automação ::..</title>
+  <title>..:: Guia Completo: IA na Prática + Google Gemini ::..</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
@@ -10,9 +10,9 @@
       --primary-dark: #3730a3;
       --gemini-color: #60a5fa;
       --chatgpt-color: #4ade80;
-      --gamma-color: #d946ef; /* Cor para Gamma */
-      --lovable-color: #22c55e; /* Cor para Lovable */
-      --n8n-color: #f97316; /* Cor para N8N */
+      --gamma-color: #d946ef;
+      --lovable-color: #22c55e;
+      --n8n-color: #f97316;
       --bg: #0f172a;
       --bg-soft: #111827;
       --card: #020617;
@@ -117,6 +117,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.5rem;
     }
+    
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
 
     .highlight {
       color: #bfdbfe;
@@ -134,6 +138,7 @@
     }
     
     .card-soft strong { color: var(--gemini-color); }
+    .card-soft h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; }
 
     .tools-row {
       display: flex;
@@ -359,7 +364,6 @@
     }
 
     @media (max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
       header { padding: 1.5rem 1rem; }
       section { padding: 1.2rem; }
       .tabs-container { overflow-x: auto; }
@@ -370,7 +374,7 @@
 
 <header>
   <h1>Guia de IA & Automação</h1>
-  <p>Conceitos fundamentais, pilares da produtividade e as novas ferramentas de automação</p>
+  <p>Conceitos fundamentais, AI Studio, Gemini API e ferramentas de automação</p>
 </header>
 
 <main>
@@ -379,6 +383,46 @@
     <h2><span class="icon">🤖</span>O que é Inteligência Artificial?</h2>
     <p>De forma simples, Inteligência Artificial é uma área da computação que cria sistemas capazes de realizar tarefas que normalmente exigem inteligência humana, como reconhecer padrões, tomar decisões e gerar conteúdo.</p>
     <p>Esses sistemas usam <span class="highlight">algoritmos</span> e grandes volumes de dados para aprender com exemplos em vez de receber instruções rígidas para cada situação.</p>
+  </section>
+
+  <!-- Seção EXTRA: Google AI Studio & Gemini API (Integrada) -->
+  <section id="ai-studio-gemini" style="border: 1px solid rgba(66, 133, 244, 0.3);">
+    <h2><span class="icon">💎</span>Google AI Studio & Gemini API</h2>
+    <p>Uma abordagem técnica sobre prototipagem rápida e integração de LLMs multimodais do Google.</p>
+
+    <div class="grid-2">
+        <!-- AI Studio -->
+        <div class="card-soft">
+            <h3>Google AI Studio</h3>
+            <p>IDE baseada em navegador projetada para prototipagem rápida de aplicações com IA generativa.</p>
+            <ul>
+                <li><strong>System Instructions:</strong> Define o comportamento, persona e formato de resposta.</li>
+                <li><strong>Multimodalidade:</strong> Suporte nativo para processar texto, imagens, vídeos e áudio simultaneamente.</li>
+                <li><strong>Exportação de Código:</strong> Gera snippets prontos em Python, JavaScript (Node.js) e cURL.</li>
+            </ul>
+        </div>
+
+        <!-- Gemini API -->
+        <div class="card-soft">
+            <h3>Integração via Gemini API</h3>
+            <p>A API fornece acesso programático aos modelos Gemini (Pro, Flash, Nano). A integração segue padrões RESTful.</p>
+            <div style="background:rgba(0,0,0,0.3); padding:0.8rem; border-radius:8px; margin-top:0.8rem; border:1px solid rgba(255,255,255,0.05);">
+                <p style="margin-bottom:0.4rem; color:#fff;"><strong>Parâmetros de Controle:</strong></p>
+                <ul style="margin-left:1rem; font-size:0.9rem;">
+                    <li><span class="highlight">Temperature:</span> Controla a aleatoriedade (criatividade).</li>
+                    <li><span class="highlight">Top-K / Top-P:</span> Filtram tokens para refinar precisão.</li>
+                    <li><span class="highlight">Max Tokens:</span> Limita o tamanho da resposta.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-box" style="margin-top:1.5rem;">
+        <strong>Conceito Chave:</strong> <span class="highlight">Engenharia de Prompt</span>
+        <p style="margin-top:0.5rem; font-size:0.9rem;">
+            Use <em>Zero-shot</em> (sem exemplos), <em>Few-shot</em> (com exemplos) ou <em>Chain-of-Thought</em> (pensar passo a passo) para melhorar drasticamente as respostas do modelo.
+        </p>
+    </div>
   </section>
 
   <!-- Seção 2: Como funciona -->
@@ -392,7 +436,7 @@
           <li><strong>Treinamento:</strong> o algoritmo ajusta milhões de parâmetros para reduzir erros.</li>
           <li><strong>Inferência:</strong> o modelo treinado responde e cria a partir de novas entradas.</li>
         </ul>
-        <p>Na prática, você conversa com um modelo já treinado e guia o comportamento dele com bons prompts (Engenharia de Prompt).</p>
+        <p>Na prática, você conversa com um modelo já treinado e guia o comportamento dele com bons prompts.</p>
       </div>
       <div>
         <!-- Gráfico Visual Simplificado -->
@@ -410,26 +454,6 @@
           <span>Evolução Exponencial da IA</span>
           <span>Futuro</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Seção 3: Pilares -->
-  <section id="pilares">
-    <h2><span class="icon">🧱</span>Três pilares de IA para o dia a dia</h2>
-    <p>Nesse bloco, o foco será o uso prático das ferramentas principais de IA para produtividade.</p>
-    <div class="tools-row">
-      <div class="tool-chip">
-        ChatGPT (OpenAI)
-        <span>Texto, código, resumo, ideias e estudo dirigido.</span>
-      </div>
-      <div class="tool-chip">
-        Gemini (Google)
-        <span>Pesquisa, arquivos, PDFs, imagens e conexão com Google.</span>
-      </div>
-      <div class="tool-chip">
-        Copilot (Microsoft)
-        <span>Integração com Windows, Word, Excel e Teams.</span>
       </div>
     </div>
   </section>
@@ -466,7 +490,7 @@
                 <div class="prompt-box">
                     <div class="prompt-title">Prompt: Agente de FAQ</div>
                     <button class="copy-btn" data-target="prompt-faq">Copiar</button>
-                    <div class="prompt-text" id="prompt-faq">Você é um agente que responde às dúvidas que os alunos te enviam. Você só deve responder dúvidas relacionadas à ementa do curso Inteligência Artificial. Não responda sobre outros assuntos.</div>
+                    <div class="prompt-text" id="prompt-faq">Você é um agente que responde às dúvidas que os alunos te enviam. Você só deve responder dúvidas relacionadas à ementa do curso Inteligência Artificial Impressionador. Não responda sobre outros assuntos.</div>
                 </div>
             </div>
         </div>
@@ -504,9 +528,7 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
     <div id="n8n" class="tab-content">
         <div class="step">
             <span class="step-title">Automação Avançada</span>
-            <p>É uma ferramenta de automação low‑code, com editor visual em que você conecta “nós” (nodes) para montar pipelines: gatilho → processamento → ação</p>
-            <p>Suporta 400+ integrações (Google, Notion, Slack, WhatsApp via APIs, bancos de dados, HTTP genérico, etc.) e também código em JavaScript/Python dentro do próprio fluxo</p>
-            <p>Para automações que conectam apps diferentes (como receber e-mail e responder no WhatsApp), use o <strong>N8N</strong>. Ele permite criar fluxos de trabalho complexos integrando diversas ferramentas. Ela pode ser usada grátis (self‑host) ou via plano na nuvem, com limitações e preços que variam conforme execuções mensais.</p>
+            <p>Para automações que conectam apps diferentes (como receber e-mail e responder no WhatsApp), use o <strong>N8N</strong>. Ele permite criar fluxos de trabalho complexos integrando diversas ferramentas.</p>
         </div>
         <div class="info-box">
             <strong>Dica:</strong> O N8N funciona como um "canivete suíço" para conectar APIs sem precisar escrever código complexo.
@@ -514,116 +536,17 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
     </div>
 
   </section>
-  
-  <!-- Seção TUTORIAL TALIA (INSERIDA) -->
-  <section id="tutorial-talia" style="border: 1px solid rgba(96, 165, 250, 0.5);">
-    <h2><span class="icon">💎</span>Tutorial: Criando a Agente "Talia"</h2>
-    <p>Aprenda a configurar um "Gem" personalizado para atuar como Suporte ao Aluno, baseado na aula prática.</p>
-    
-    <div class="step">
-        <span class="step-title">1. Acessar o Gerenciador</span>
-        <p>No painel esquerdo do Gemini, clique em <strong>Gems Manager</strong> e depois selecione <strong>"New Gem"</strong> para começar do zero.</p>
-    </div>
 
-    <div class="step">
-        <span class="step-title">2. Definir Identidade e Instruções</span>
-        <p>Dê vida ao agente definindo quem ele é e como deve se comportar. Exemplo da aula:</p>
-        <div class="grid-2">
-            <div>
-                <p><strong>Nome:</strong> Talia (Suporte ao Aluno)</p>
-                <div class="prompt-box">
-                    <div class="prompt-title">Instruções (Prompt)</div>
-                    <div class="prompt-text">Você é um agente que responde às dúvidas que os alunos te enviam. Você só deve responder dúvidas relacionadas à ementa do curso 'Inteligência Artificial Impressionador'. Você NÃO deve responder dúvidas sobre outros assuntos.</div>
-                </div>
-            </div>
-            <div class="info-box">
-                <strong>Dica Importante:</strong> Seja específico no que o agente NÃO deve fazer (ex: falar sobre futebol ou clima) para evitar alucinações.
-            </div>
-        </div>
-    </div>
-
-    <div class="step">
-        <span class="step-title">3. Adicionar Conhecimento (Knowledge)</span>
-        <p>Este é o passo mais importante. No campo <strong>Knowledge</strong>, clique em "Adicionar Arquivos" e suba o PDF com a <strong>Ementa do Curso</strong>.</p>
-        <p>Isso permite que a Talia leia o arquivo e use aquelas informações específicas para responder, em vez de usar apenas o conhecimento geral da internet.</p>
-    </div>
-
-    <div class="step">
-        <span class="step-title">4. Testar e Salvar</span>
-        <p>Use o painel de pré-visualização (lado direito) para testar. Pergunte: <em>"Tem aula de Chat GPT no curso?"</em>. Se ela responder corretamente baseada no PDF, clique em <strong>Create/Save</strong>.</p>
-    </div>
-  </section>
-
-  <!-- Seção 5: Tutorial Prático Caligrafia (Original) -->
-  <section id="tutorial-caligrafia" style="border: 1px solid rgba(96, 165, 250, 0.3);">
-    <h2><span class="icon">✍️</span>Tutorial: Caligrafia Profissional</h2>
-    <p>Transforme fotos de cadernos com letra "feia" em resumos perfeitos.</p>
-    
-    <div class="tabs-container">
-        <div class="tab-btn active gemini-tab" onclick="openHandwritingTab('gemini-hw')">Usando Gemini</div>
-        <div class="tab-btn chatgpt-tab" onclick="openHandwritingTab('chatgpt-hw')">Usando ChatGPT</div>
-    </div>
-
-    <div id="gemini-hw" class="hw-content active">
-        <div class="step">
-            <span class="step-title">1. Enviar o Material</span>
-            <p>No Gemini, faça o upload da foto do caderno ou PDF.</p>
-        </div>
-        <div class="prompt-box">
-            <div class="prompt-title">Prompt de Imagem</div>
-            <button class="copy-btn" data-target="p-gemini-2">Copiar</button>
-            <div class="prompt-text" id="p-gemini-2">Crie um resumo manuscrito sobre [INSIRA TÓPICO]. Use fonte caligrafia estudantil em papel pautado, marcador amarelo neon e circule datas em vermelho. Folha A4 vertical.</div>
-        </div>
-    </div>
-
-    <div id="chatgpt-hw" class="hw-content" style="display:none; animation: fadeIn 0.4s;">
-        <div class="step">
-            <span class="step-title">1. Enviar o Material</span>
-            <p>No ChatGPT, anexe sua imagem ou PDF.</p>
-        </div>
-        <div class="prompt-box">
-            <div class="prompt-title">Prompt de Imagem</div>
-            <button class="copy-btn" data-target="p-gpt-2">Copiar</button>
-            <div class="prompt-text" id="p-gpt-2">Crie um resumo manuscrito sobre [INSIRA TÓPICO]. Use fonte caligrafia estudantil em papel pautado, marcador amarelo neon e circule datas em vermelho. Folha A4 vertical.</div>
-        </div>
-    </div>
-  </section>
-
-  <!-- Seção 6: Super Banco de Prompts -->
-  <section id="prompts">
-    <h2><span class="icon">⌨️</span>Banco de Prompts Práticos</h2>
-    
-    <div class="grid-2">
-        <div class="prompt-box">
-            <div class="prompt-title">Planejamento de Aula</div>
-            <button class="copy-btn" data-target="prompt-aula">Copiar</button>
-            <div class="prompt-text" id="prompt-aula">Você é um professor especialista em tecnologia. Crie um plano de aula de 1h30 sobre Inteligência Artificial para iniciantes, incluindo: objetivos, tópicos, exemplos práticos e 5 exercícios.</div>
-        </div>
-
-        <div class="prompt-box">
-            <div class="prompt-title">E-mail profissional</div>
-            <button class="copy-btn" data-target="prompt-email">Copiar</button>
-            <div class="prompt-text" id="prompt-email">Reescreva o e-mail abaixo deixando mais claro, direto e educado. Sugira um assunto profissional.
-[E-MAIL ORIGINAL]
-(cole aqui)</div>
-        </div>
-    </div>
-    
-    <div class="info-box">
-        <p><strong>Dica de ouro:</strong> Use o <span class="highlight">@</span> para conectar a IA aos seus arquivos reais.</p>
-    </div>
-  </section>
-
-  <!-- Seção 7: Quiz (Expandido) -->
+  <!-- Seção 7: Quiz Integrado (Expandido) -->
   <section id="quiz">
-    <h2><span class="icon">✅</span>Quiz de Conhecimentos (IA + Automação)</h2>
-    <p>Teste seu conhecimento com 10 perguntas sorteadas do nosso banco de dados expandido.</p>
+    <h2><span class="icon">✅</span>Quiz Técnico (IA, Gemini, Automação)</h2>
+    <p>Teste seu conhecimento com 10 perguntas sorteadas de nosso banco expandido (50+ questões).</p>
     <div id="quiz-container"></div>
     
     <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap: wrap;">
         <button id="calc-btn" class="btn">Calcular Nota</button>
         <span class="score" id="score"></span>
-        <button onclick="location.reload()" style="background:transparent; border:1px solid #666; color:#aaa; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; font-size:0.8rem;">Novas Perguntas ↻</button>
+        <button onclick="localStorage.removeItem('quiz_data_v5'); location.reload()" style="background:transparent; border:1px solid #666; color:#aaa; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; font-size:0.8rem;">Embaralhar Tudo ↻</button>
     </div>
     <div class="answers" id="answers"></div>
   </section>
@@ -631,44 +554,21 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
 </main>
 
 <footer>
-  <p>Halex System&reg - 2026</p>
+  <p>Halex System&reg; & DevMaster/AI - 2026</p>
 </footer>
 
 <script>
   /* --- Tabs de Automação (Aula 3) --- */
   function openToolTab(toolId) {
-    // Esconder todos os conteúdos deste grupo
     const contents = document.querySelectorAll('#aula3-automacao .tab-content');
     contents.forEach(c => c.classList.remove('active'));
     
-    // Remover classe active dos botões
     const buttons = document.querySelectorAll('#aula3-automacao .tab-btn');
     buttons.forEach(b => b.classList.remove('active'));
 
-    // Ativar o selecionado
     document.getElementById(toolId).classList.add('active');
     
-    // Encontrar o botão clicado (gambiarra segura via evento onclick)
     const activeBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(toolId));
-    if(activeBtn) activeBtn.classList.add('active');
-  }
-
-  /* --- Tabs de Caligrafia (Original) --- */
-  function openHandwritingTab(tabId) {
-    const contents = document.querySelectorAll('.hw-content');
-    contents.forEach(c => {
-        c.style.display = 'none';
-        c.classList.remove('active');
-    });
-
-    const buttons = document.querySelectorAll('#tutorial-caligrafia .tab-btn');
-    buttons.forEach(b => b.classList.remove('active'));
-
-    const selected = document.getElementById(tabId);
-    selected.style.display = 'block';
-    selected.classList.add('active');
-
-    const activeBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(tabId));
     if(activeBtn) activeBtn.classList.add('active');
   }
 
@@ -689,21 +589,14 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
           btn.textContent = originalText;
         }, 2000);
       } catch (err) {
-        // Fallback antigo
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
         alert('Copiado!');
       }
     });
   });
 
-  /* --- Quiz Logic (Expandido) --- */
+  /* --- Quiz Logic Integrada --- */
   (function () {
-    // Banco Completo (Geral + Aula 3 + Tutorial Talia)
+    // Banco Completo (Geral + Aula 3 + Gemini/AI Studio do Código Anterior)
     const fullQuestionBank = [
       // -- GERAIS --
       { text: 'O que é IA Generativa?', options: ['IA que só analisa números', 'IA capaz de criar conteúdo novo', 'Um robô aspirador', 'Banco de dados fixo'], correct: 1 },
@@ -716,6 +609,8 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
       { text: 'Para que serve o @ em prompts?', options: ['Decorar', 'Referenciar arquivos/ferramentas', 'Aumentar nota', 'Deixar lento'], correct: 1 },
       { text: 'Curva de aprendizado da IA moderna:', options: ['Linear', 'Exponencial', 'Decrescente', 'Estática'], correct: 1 },
       { text: 'Papel do humano com IA:', options: ['Ser substituído', 'Guiar e validar', 'Não usar', 'Imprimir tudo'], correct: 1 },
+      
+      // -- AULA 3 (AUTOMAÇÃO) --
       { text: 'Qual ferramenta cria slides em segundos?', options: ['PowerPoint', 'Gamma', 'Canva', 'Excel'], correct: 1 },
       { text: 'Como o Google Gemini chama seus agentes?', options: ['Bots', 'Assistentes', 'Gems', 'Plugins'], correct: 2 },
       { text: 'É possível criar Gems na versão gratuita?', options: ['Sim', 'Não', 'Só para empresas', 'Sim, mas não salva'], correct: 0 },
@@ -726,19 +621,31 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
       { text: 'Para criar um agente especialista, você fornece:', options: ['Foto', 'Instruções e Base de Conhecimento', 'Link YouTube', 'Nada'], correct: 1 },
       { text: 'O Gamma exporta para:', options: ['Apenas PDF', 'Apenas Imagem', 'PDF e PowerPoint', 'Word'], correct: 2 },
       { text: 'O Lovable exige saber código?', options: ['Sim, Python', 'Sim, HTML', 'Não, usa linguagem natural', 'Sim, C++'], correct: 2 },
-      { text: 'Qual era a função da agente Talia?', options: ['Criar imagens', 'Suporte ao Aluno (Dúvidas)', 'Gerar planilhas', 'Contar piadas'], correct: 1 },
-      { text: 'O que foi enviado como "Conhecimento" para a Talia?', options: ['Uma foto', 'PDF da Ementa do Curso', 'Link do Google', 'Vídeo do YouTube'], correct: 1 },
-      { text: 'Por que definimos o que o agente NÃO deve fazer?', options: ['Para economizar bateria', 'Para evitar alucinações/respostas fora do tema', 'Para ser indelicado', 'Não serve para nada'], correct: 1 },
-      { text: 'Onde clicamos para criar um agente no Gemini?', options: ['Configurações', 'Gems Manager', 'Nova Conversa', 'Histórico'], correct: 1 },
-      { text: 'O que significa N8N?', options: ['Nada', 'Ferramenta de automação de nós', 'Novo modelo IA', 'Canal TV'], correct: 1 },
-      { text: 'Quantos slides o Gamma cria rápido?', options: ['1', 'Apresentação completa', 'Nenhum', '5'], correct: 1 },
-      { text: 'Nome do agente de exemplo da aula:', options: ['FredBot', 'Talia', 'Carol', 'GeminiHelp'], correct: 1 },
-      { text: 'É uma ferramenta de automação low‑code:', options: ['Gemini', 'ChatGPT', 'N8N', 'Perplexity'], correct: 3 },
-      { text: 'Benefício da automação:', options: ['Substituir humanos', 'Produtividade e tempo', 'Gastar energia', 'Complicar'], correct: 1 },
-      { text: 'Agente "GPT" é de qual IA?', options: ['Gemini', 'ChatGPT', 'Claude', 'Llama'], correct: 1 }
+
+      // -- NOVAS QUESTÕES (GEMINI API & AI STUDIO) --
+      { text: "Qual a função do parâmetro 'Temperature'?", options: ["Aumentar velocidade", "Controlar aleatoriedade/criatividade", "Definir limite de caracteres", "Ajustar brilho"], correct: 1 },
+      { text: "O que é 'Few-shot Prompting'?", options: ["Sem contexto", "Fornecer exemplos de entrada/saída", "Reiniciar modelo", "Usar só imagens"], correct: 1 },
+      { text: "No AI Studio, o que é 'System Instruction'?", options: ["Configuração de hardware", "Instruções de persona/comportamento", "Comando de desligar", "Histórico de chat"], correct: 1 },
+      { text: "Modelo Gemini otimizado para eficiência e rapidez:", options: ["Gemini Ultra", "Gemini Pro", "Gemini Flash", "Gemini Nano"], correct: 2 },
+      { text: "O que significa 'multimodal' no Gemini?", options: ["Vários sistemas operacionais", "Processa texto, imagem, áudio e vídeo", "Múltiplos idiomas apenas", "Sem internet"], correct: 1 },
+      { text: "SDK oficial para integrar Gemini com Python:", options: ["google-generativeai", "openai-python", "gemini-connect", "py-google-ai"], correct: 0 },
+      { text: "O que acontece com temperatura 0?", options: ["Modelo para", "Resposta determinística e focada", "Superaquece", "Muito aleatória"], correct: 1 },
+      { text: "O que é um 'Token'?", options: ["Moeda virtual", "Menor unidade de processamento de texto", "Chave de acesso", "Erro de compilação"], correct: 1 },
+      { text: "Para evitar temas perigosos, usamos:", options: ["Temperature", "Safety Settings", "Top-P", "Stop Sequences"], correct: 1 },
+      { text: "O que é 'Hallucination' (Alucinação)?", options: ["Resposta visual", "Gerar informações falsas com confiança", "Queda de servidor", "Modo 3D"], correct: 1 },
+      { text: "Formato comum de saída estruturada:", options: ["XML", "JSON", "CSV", "Binário"], correct: 1 },
+      { text: "Janela de contexto do Gemini 1.5 Pro (lançamento):", options: ["4 mil", "128 mil", "Até 1 ou 2 milhões de tokens", "500 tokens"], correct: 2 },
+      { text: "Para que serve a 'API Key'?", options: ["Autenticar uso da API", "Criptografar banco", "Traduzir texto", "Aumentar velocidade"], correct: 0 },
+      { text: "Melhor prática para prompts complexos:", options: ["Linha única", "Chain of Thought (passo a passo)", "Gírias", "Prompt vazio"], correct: 1 },
+      { text: "Onde roda o Google AI Studio?", options: ["Servidor local", "Navegador web (Cloud)", "Android apenas", ".exe"], correct: 1 },
+      { text: "O que é RAG?", options: ["Novo modelo", "Geração com busca em dados externos", "Erro de API", "Cor"], correct: 1 },
+      { text: "Gemini Nano roda onde?", options: ["Supercomputadores", "On-device (local)", "Nuvem", "Disquete"], correct: 1 },
+      { text: "O que NÃO é parâmetro de geração?", options: ["Temperature", "Top-K", "Gravity", "Max Output Tokens"], correct: 2 },
+      { text: "O que o 'Context Caching' economiza?", options: ["Espaço em disco", "Custos e latência em grandes contextos", "Bateria", "Memória RAM"], correct: 1 },
+      { text: "Vantagem do AI Studio:", options: ["Prototipagem rápida visual", "Sem internet", "Melhor imagem", "Única forma de usar"], correct: 0 }
     ];
 
-    const STORAGE_KEY = 'quiz_data_v5'; // Atualizado para v5 para forçar refresh
+    const STORAGE_KEY = 'quiz_data_v5'; // Versão atualizada
     const QUIZ_SIZE = 10;
     const REPLACE_COUNT = 4; // Trocar 4 (40%)
 
@@ -782,13 +689,13 @@ Primeiros socorros para iniciantes, com ilustrações amigáveis e passo a passo
 
     // Inicialização
     const questions = getSessionQuestions();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(questions)); // Salva para a próxima "refresh" ter base de troca
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(questions));
 
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
 
     questions.forEach((q, idx) => {
-        // Embaralhar opções para não decorar posição
+        // Embaralhar opções
         const optionsWithIndex = q.options.map((opt, originalIdx) => ({ txt: opt, idx: originalIdx }));
         const shuffledOpts = shuffle(optionsWithIndex);
 
