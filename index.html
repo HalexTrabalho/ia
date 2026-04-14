@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-        
+
         :root {
             --bg-dark: #020617;
             --card-dark: #0f172a;
@@ -35,7 +35,9 @@
         }
 
         .ia-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .ia-card:hover {
@@ -45,7 +47,7 @@
         }
 
         .quiz-option {
-            transition: all 0.2s;
+            transition: background 0.2s;
             cursor: pointer;
         }
 
@@ -53,16 +55,10 @@
             background: rgba(56, 189, 248, 0.1);
         }
 
-        .quiz-option.selected {
-            background: #38bdf8;
-            color: #020617;
-            font-weight: bold;
-        }
-
-        .correct { background-color: #059669 !important; color: white; }
-        .incorrect { background-color: #dc2626 !important; color: white; }
-        
-        .hidden-answer { display: none; }
+        .quiz-option.selected { background: #38bdf8; color: #020617; font-weight: bold; }
+        .quiz-option.correct  { background-color: #059669 !important; color: white; }
+        .quiz-option.incorrect { background-color: #dc2626 !important; color: white; }
+        .quiz-option.disabled { pointer-events: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -89,13 +85,15 @@
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
                 O Futuro da <span class="gradient-text">Inteligência Artificial</span>
             </h1>
-            <p class="text-xl text-slate-400 mb-10">
-                A unificação completa dos modelos de 2024 a 2026. Do Google Gemini à DeepSeek, 
+            <p class="text-xl text-slate-400 mb-4">
+                A unificação completa dos modelos de 2024 a 2026. Do Google Gemini à DeepSeek,
                 domine as ferramentas que estão moldando a nova economia digital.
             </p>
-			<h2><span class="icon">🤖</span>O que é Inteligência Artificial?</h2>
-    <p>De forma simples, Inteligência Artificial é uma área da computação que cria sistemas capazes de realizar tarefas que normalmente exigem inteligência humana, como reconhecer padrões, tomar decisões e gerar conteúdo.</p>
-    <p>Esses sistemas usam <span class="highlight">algoritmos</span> e grandes volumes de dados para aprender com exemplos em vez de receber instruções rígidas para cada situação.</p><br>
+            <div class="text-left max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold mb-3">🤖 O que é Inteligência Artificial?</h2>
+                <p class="text-slate-300 mb-2">De forma simples, Inteligência Artificial é uma área da computação que cria sistemas capazes de realizar tarefas que normalmente exigem inteligência humana, como reconhecer padrões, tomar decisões e gerar conteúdo.</p>
+                <p class="text-slate-300">Esses sistemas usam <strong class="text-sky-400">algoritmos</strong> e grandes volumes de dados para aprender com exemplos em vez de receber instruções rígidas para cada situação.</p>
+            </div>
             <div class="flex flex-wrap justify-center gap-4">
                 <div class="px-4 py-2 bg-slate-800 rounded-full text-sm border border-slate-700">#Gemini1.5Pro</div>
                 <div class="px-4 py-2 bg-slate-800 rounded-full text-sm border border-slate-700">#OpenAI_o1</div>
@@ -110,60 +108,7 @@
     <section id="modelos" class="py-20 bg-slate-900/50">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-12 text-center">Principais Ecossistemas & Modelos</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Google Gemini -->
-                <div class="ia-card bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-sky-500/20 rounded-xl text-sky-400">
-                            <i class="fas fa-star text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Google Gemini</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">A IA multimodal nativa do Google. Líder em janela de contexto (até 2 milhões de tokens).</p>
-                    <ul class="text-sm space-y-2 mb-6">
-                        <li><i class="fas fa-check text-sky-400 mr-2"></i><strong>1.5 Pro:</strong> Alta complexidade e raciocínio.</li>
-                        <li><i class="fas fa-check text-sky-400 mr-2"></i><strong>1.5 Flash:</strong> Velocidade extrema para automações.</li>
-                        <li><i class="fas fa-check text-sky-400 mr-2"></i><strong>Gems:</strong> Versões personalizadas de especialistas.</li>
-                    </ul>
-                    <div class="bg-slate-900 p-3 rounded-lg text-xs text-sky-300 font-mono">Destaque: Integração Google Workspace</div>
-                </div>
-
-                <!-- OpenAI -->
-                <div class="ia-card bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-emerald-500/20 rounded-xl text-emerald-400">
-                            <i class="fas fa-brain text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">OpenAI o1 & 4o</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">Referência em raciocínio lógico avançado e conversação humana.</p>
-                    <ul class="text-sm space-y-2 mb-6">
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>GPT-4o:</strong> Multimodalidade em tempo real.</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>o1-preview:</strong> Foco em STEM e lógica pura.</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>SearchGPT:</strong> O buscador que entende intenção.</li>
-                    </ul>
-                    <div class="bg-slate-900 p-3 rounded-lg text-xs text-emerald-300 font-mono">Destaque: Raciocínio (Chain of Thought)</div>
-                </div>
-
-                <!-- Anthropic Claude -->
-                <div class="ia-card bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-orange-500/20 rounded-xl text-orange-400">
-                            <i class="fas fa-feather-pointed text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Claude 3.5 Sonnet</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">Considerado por muitos o melhor para escrita criativa e programação.</p>
-                    <ul class="text-sm space-y-2 mb-6">
-                        <li><i class="fas fa-check text-orange-400 mr-2"></i><strong>Escrita:</strong> Menos robótico que o GPT.</li>
-                        <li><i class="fas fa-check text-orange-400 mr-2"></i><strong>Artifacts:</strong> Visualização de código/UI ao vivo.</li>
-                        <li><i class="fas fa-check text-orange-400 mr-2"></i><strong>Computer Use:</strong> A IA que opera seu PC.</li>
-                    </ul>
-                    <div class="bg-slate-900 p-3 rounded-lg text-xs text-orange-300 font-mono">Destaque: UI/UX e Programação</div>
-                </div>
-
-            </div>
+            <div id="models-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
@@ -174,7 +119,6 @@
                 <h2 class="text-4xl font-bold mb-4">Deep Dive: O Poder Silencioso</h2>
                 <p class="text-slate-400">Explorando modelos que estão mudando o jogo por trás dos holofotes.</p>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Mistral AI Section -->
                 <div class="bg-slate-900 rounded-3xl p-8 border border-slate-800">
@@ -233,45 +177,7 @@
     <section id="ferramentas" class="py-20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-12 text-center text-sky-400">Ecossistema de Produtividade</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Automação e Slides -->
-                <div class="space-y-6">
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex gap-4">
-                        <div class="text-3xl text-purple-400"><i class="fas fa-project-diagram"></i></div>
-                        <div>
-                            <h4 class="font-bold">Gamma.app</h4>
-                            <p class="text-sm text-slate-400 italic">Cria slides, sites e documentos do zero em segundos apenas com um prompt.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex gap-4">
-                        <div class="text-3xl text-orange-500"><i class="fas fa-robot"></i></div>
-                        <div>
-                            <h4 class="font-bold">n8n / Make</h4>
-                            <p class="text-sm text-slate-400 italic">Cérebro das automações. Conecta a IA ao seu WhatsApp, E-mail e CRM.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Web e Busca -->
-                <div class="space-y-6">
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex gap-4">
-                        <div class="text-3xl text-emerald-400"><i class="fas fa-code"></i></div>
-                        <div>
-                            <h4 class="font-bold">Lovable / Bolt.new</h4>
-                            <p class="text-sm text-slate-400 italic">Gera aplicações web completas e funcionais conversando com a IA.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex gap-4">
-                        <div class="text-3xl text-blue-400"><i class="fas fa-search"></i></div>
-                        <div>
-                            <h4 class="font-bold">Perplexity AI</h4>
-                            <p class="text-sm text-slate-400 italic">O fim do "Blue Links" do Google. Respostas diretas com fontes citadas em tempo real.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
         </div>
     </section>
 
@@ -279,20 +185,7 @@
     <section id="prompts" class="py-20 bg-slate-900">
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-terminal mr-3 text-sky-400"></i>Prompt Engineering 2026</h2>
-            <div class="space-y-4">
-                <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-sky-500">
-                    <span class="text-xs font-bold text-sky-400 block mb-1 uppercase tracking-wider">Mega Prompt de Aprendizado</span>
-                    <p class="text-sm text-slate-200">"Atue como um tutor socrático. Explique [Conceito] usando uma analogia simples de culinária e, em seguida, me faça uma pergunta para testar minha compreensão."</p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-emerald-500">
-                    <span class="text-xs font-bold text-emerald-400 block mb-1 uppercase tracking-wider">Prompt de Programação (Claude/DeepSeek)</span>
-                    <p class="text-sm text-slate-200">"Refatore este código seguindo os princípios SOLID. Priorize legibilidade e performance de memória. Liste as 3 principais mudanças feitas."</p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-purple-500">
-                    <span class="text-xs font-bold text-purple-400 block mb-1 uppercase tracking-wider">Análise de Dados (Gemini 1.5 Pro)</span>
-                    <p class="text-sm text-slate-200">"Analise este PDF de 500 páginas e identifique todas as menções a riscos fiscais. Crie uma tabela Markdown correlacionando o risco com a página e a gravidade."</p>
-                </div>
-            </div>
+            <div id="prompts-list" class="space-y-4"></div>
         </div>
     </section>
 
@@ -303,17 +196,12 @@
                 <h2 class="text-3xl font-bold gradient-text mb-2">The Ultimate AI Quiz</h2>
                 <p class="text-slate-400">Teste sua maestria nos modelos de 2026. (10 questões aleatórias)</p>
             </div>
-            
-            <div id="quiz-container" class="space-y-8">
-                <!-- Perguntas serão injetadas aqui -->
-            </div>
-
+            <div id="quiz-container" class="space-y-8"></div>
             <div id="result-display" class="hidden mt-12 p-6 bg-slate-800 rounded-2xl text-center border-2 border-sky-400">
                 <h3 class="text-2xl font-bold mb-2">Resultado Final</h3>
                 <p id="score-text" class="text-4xl font-extrabold mb-4">0 de 10</p>
                 <button onclick="location.reload()" class="bg-sky-600 px-6 py-2 rounded-lg hover:bg-sky-500 transition">Tentar Novamente</button>
             </div>
-
             <button id="submit-quiz" class="mt-10 w-full py-4 bg-gradient-to-r from-sky-600 to-indigo-600 rounded-xl font-bold text-lg hover:scale-[1.02] transition active:scale-95 shadow-lg shadow-sky-500/20">
                 Finalizar e Ver Desempenho
             </button>
@@ -322,110 +210,267 @@
 
     <!-- Rodapé -->
     <footer class="py-12 border-t border-slate-800 text-center text-slate-500 text-sm">
-        <p>&copy; Halex System&reg</p>
+        <p>&copy; Halex System&reg;</p>
         <p class="mt-2 text-xs">Informação é a nova eletricidade. Use com sabedoria.</p>
     </footer>
 
     <script>
-        // Banco de Dados Unificado de Questões
-        const allQuestions = [
-            { q: "Qual modelo é famoso por sua janela de contexto de 2 milhões de tokens?", options: ["GPT-4o", "Claude 3.5", "Gemini 1.5 Pro", "Llama 3.1"], correct: 2 },
-            { q: "Qual a principal característica do modelo o1 da OpenAI?", options: ["Geração de imagens rápidas", "Raciocínio lógico (Chain of Thought)", "Transcrição de áudio", "Criação de sites automáticos"], correct: 1 },
-            { q: "Para que serve a ferramenta n8n?", options: ["Criar imagens", "Automação de fluxos de trabalho", "Busca em tempo real", "Programação em Python"], correct: 1 },
-            { q: "Qual modelo é conhecido por ser 'Soberano Europeu' e focar em privacidade?", options: ["DeepSeek", "Mistral Large", "Grok", "Claude"], correct: 1 },
-            { q: "A arquitetura MLA (Multi-head Latent Attention) é um diferencial técnico de qual IA?", options: ["GPT-5", "Claude 3", "DeepSeek-V3", "Gemini Flash"], correct: 2 },
-            { q: "Qual ferramenta é ideal para gerar slides e apresentações a partir de um texto?", options: ["Lovable", "n8n", "Gamma.app", "DeepL"], correct: 2 },
-            { q: "O Perplexity AI é focado principalmente em qual tarefa?", options: ["Geração de áudio", "Programação pesada", "Busca de informações com fontes", "Design de logos"], correct: 2 },
-            { q: "Qual recurso do Claude 3.5 Sonnet permite ver o código rodando ao lado do chat?", options: ["Canvas", "Artifacts", "Previewer", "LiveView"], correct: 1 },
-            { q: "O termo 'Computer Use' da Anthropic refere-se a quê?", options: ["Uso da IA para minerar cripto", "IA operando mouse e teclado do PC", "IA que conserta hardware", "IA que joga videogame"], correct: 1 },
-            { q: "Qual destes modelos é de código aberto (Open Weights)?", options: ["GPT-4o", "Llama 3.1", "Gemini 1.5 Pro", "Claude 3.5 Sonnet"], correct: 1 },
-            { q: "DeepSeek é uma empresa originária de qual país?", options: ["França", "EUA", "China", "Japão"], correct: 2 },
-            { q: "O que significa 'Tokens' no contexto de LLMs?", options: ["Moedas digitais", "Unidades básicas de texto processadas", "Senhas de acesso", "Tipos de hardware"], correct: 1 },
-            { q: "Qual a principal vantagem da Mistral AI para empresas corporativas?", options: ["Preço fixo", "Hospedagem local e privacidade", "Melhores imagens", "Integração com o Windows"], correct: 1 },
-            { q: "Para que serve o Bolt.new ou Lovable?", options: ["Editar vídeos", "Gerar aplicações Web funcionais", "Comprar domínios", "Minificar código"], correct: 1 },
-            { q: "Qual modelo costuma ser preferido para escrita criativa menos robótica?", options: ["GPT-4o", "Claude 3.5 Sonnet", "DeepSeek", "Llama"], correct: 1 }
-        ];
+    (() => {
+        'use strict';
 
-        // Seleção aleatória de 10 questões
-        const selectedQuestions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
-        const userAnswers = new Array(10).fill(null);
+        // ─── SRP: cada objeto tem uma única responsabilidade ──────────────────
 
-        function initQuiz() {
-            const container = document.getElementById('quiz-container');
-            selectedQuestions.forEach((item, index) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'quiz-question bg-slate-900/50 p-6 rounded-2xl border border-slate-800';
-                qDiv.innerHTML = `
-                    <p class="font-bold mb-4 text-slate-100">${index + 1}. ${item.q}</p>
-                    <div class="grid grid-cols-1 gap-3" id="q-options-${index}">
-                        ${item.options.map((opt, i) => `
-                            <div class="quiz-option p-3 border border-slate-700 rounded-xl text-sm" onclick="selectOption(${index}, ${i})">
-                                ${opt}
-                            </div>
-                        `).join('')}
-                    </div>
-                    <p id="correct-ans-${index}" class="hidden-answer text-xs mt-3 text-emerald-400 font-mono">
-                        Resposta Correta: ${item.options[item.correct]}
-                    </p>
-                `;
-                container.appendChild(qDiv);
-            });
-        }
+        /** Dados estáticos da aplicação — apenas dados, nenhuma lógica */
+        const DATA = Object.freeze({
+            models: [
+                {
+                    color: 'sky',
+                    icon: 'fa-star',
+                    name: 'Google Gemini',
+                    description: 'A IA multimodal nativa do Google. Líder em janela de contexto (até 2 milhões de tokens).',
+                    features: [
+                        { label: '1.5 Pro', detail: 'Alta complexidade e raciocínio.' },
+                        { label: '1.5 Flash', detail: 'Velocidade extrema para automações.' },
+                        { label: 'Gems', detail: 'Versões personalizadas de especialistas.' },
+                    ],
+                    highlight: 'Destaque: Integração Google Workspace',
+                },
+                {
+                    color: 'emerald',
+                    icon: 'fa-brain',
+                    name: 'OpenAI o1 & 4o',
+                    description: 'Referência em raciocínio lógico avançado e conversação humana.',
+                    features: [
+                        { label: 'GPT-4o', detail: 'Multimodalidade em tempo real.' },
+                        { label: 'o1-preview', detail: 'Foco em STEM e lógica pura.' },
+                        { label: 'SearchGPT', detail: 'O buscador que entende intenção.' },
+                    ],
+                    highlight: 'Destaque: Raciocínio (Chain of Thought)',
+                },
+                {
+                    color: 'orange',
+                    icon: 'fa-feather-pointed',
+                    name: 'Claude 3.5 Sonnet',
+                    description: 'Considerado por muitos o melhor para escrita criativa e programação.',
+                    features: [
+                        { label: 'Escrita', detail: 'Menos robótico que o GPT.' },
+                        { label: 'Artifacts', detail: 'Visualização de código/UI ao vivo.' },
+                        { label: 'Computer Use', detail: 'A IA que opera seu PC.' },
+                    ],
+                    highlight: 'Destaque: UI/UX e Programação',
+                },
+            ],
 
-        window.selectOption = function(qIndex, optIndex) {
-            userAnswers[qIndex] = optIndex;
-            const options = document.getElementById(`q-options-${qIndex}`).children;
-            for (let opt of options) {
-                opt.classList.remove('selected');
-            }
-            options[optIndex].classList.add('selected');
-        }
+            tools: [
+                { icon: 'fa-project-diagram', color: 'purple', name: 'Gamma.app',      description: 'Cria slides, sites e documentos do zero em segundos apenas com um prompt.' },
+                { icon: 'fa-robot',           color: 'orange', name: 'n8n / Make',     description: 'Cérebro das automações. Conecta a IA ao seu WhatsApp, E-mail e CRM.' },
+                { icon: 'fa-code',            color: 'emerald',name: 'Lovable / Bolt.new', description: 'Gera aplicações web completas e funcionais conversando com a IA.' },
+                { icon: 'fa-search',          color: 'blue',   name: 'Perplexity AI',  description: 'O fim do "Blue Links" do Google. Respostas diretas com fontes citadas em tempo real.' },
+            ],
 
-        document.getElementById('submit-quiz').addEventListener('click', function() {
-            let score = 0;
-            let answeredAll = userAnswers.every(ans => ans !== null);
+            prompts: [
+                { color: 'sky',    category: 'Mega Prompt de Aprendizado',           text: '"Atue como um tutor socrático. Explique [Conceito] usando uma analogia simples de culinária e, em seguida, me faça uma pergunta para testar minha compreensão."' },
+                { color: 'emerald',category: 'Prompt de Programação (Claude/DeepSeek)', text: '"Refatore este código seguindo os princípios SOLID. Priorize legibilidade e performance de memória. Liste as 3 principais mudanças feitas."' },
+                { color: 'purple', category: 'Análise de Dados (Gemini 1.5 Pro)',    text: '"Analise este PDF de 500 páginas e identifique todas as menções a riscos fiscais. Crie uma tabela Markdown correlacionando o risco com a página e a gravidade."' },
+            ],
 
-            if (!answeredAll) {
-                alert("Por favor, responda todas as 10 questões antes de finalizar!");
-                return;
-            }
-
-            selectedQuestions.forEach((item, index) => {
-                const options = document.getElementById(`q-options-${index}`).children;
-                const correctDisplay = document.getElementById(`correct-ans-${index}`);
-                
-                correctDisplay.classList.remove('hidden-answer');
-
-                if (userAnswers[index] === item.correct) {
-                    score++;
-                    options[userAnswers[index]].classList.add('correct');
-                } else {
-                    options[userAnswers[index]].classList.add('incorrect');
-                    options[item.correct].classList.add('correct');
-                }
-                
-                // Desabilitar cliques após finalizar
-                for (let opt of options) opt.style.pointerEvents = 'none';
-            });
-
-            const resultDisplay = document.getElementById('result-display');
-            const scoreText = document.getElementById('score-text');
-            const submitBtn = document.getElementById('submit-quiz');
-
-            resultDisplay.classList.remove('hidden');
-            submitBtn.classList.add('hidden');
-            scoreText.innerText = `${score} de 10 Acertos`;
-
-            if (score >= 7) {
-                scoreText.className = 'text-4xl font-extrabold mb-4 text-emerald-400';
-            } else {
-                scoreText.className = 'text-4xl font-extrabold mb-4 text-orange-400';
-            }
-
-            resultDisplay.scrollIntoView({ behavior: 'smooth' });
+            questions: [
+                { q: 'Qual modelo é famoso por sua janela de contexto de 2 milhões de tokens?',       options: ['GPT-4o', 'Claude 3.5', 'Gemini 1.5 Pro', 'Llama 3.1'],                            correct: 2 },
+                { q: 'Qual a principal característica do modelo o1 da OpenAI?',                        options: ['Geração de imagens rápidas', 'Raciocínio lógico (Chain of Thought)', 'Transcrição de áudio', 'Criação de sites automáticos'], correct: 1 },
+                { q: 'Para que serve a ferramenta n8n?',                                               options: ['Criar imagens', 'Automação de fluxos de trabalho', 'Busca em tempo real', 'Programação em Python'],     correct: 1 },
+                { q: 'Qual modelo é conhecido por ser "Soberano Europeu" e focar em privacidade?',     options: ['DeepSeek', 'Mistral Large', 'Grok', 'Claude'],                                    correct: 1 },
+                { q: 'A arquitetura MLA (Multi-head Latent Attention) é um diferencial de qual IA?',  options: ['GPT-5', 'Claude 3', 'DeepSeek-V3', 'Gemini Flash'],                               correct: 2 },
+                { q: 'Qual ferramenta é ideal para gerar slides a partir de um texto?',                options: ['Lovable', 'n8n', 'Gamma.app', 'DeepL'],                                           correct: 2 },
+                { q: 'O Perplexity AI é focado principalmente em qual tarefa?',                        options: ['Geração de áudio', 'Programação pesada', 'Busca de informações com fontes', 'Design de logos'], correct: 2 },
+                { q: 'Qual recurso do Claude 3.5 Sonnet permite ver o código rodando ao lado do chat?',options: ['Canvas', 'Artifacts', 'Previewer', 'LiveView'],                                  correct: 1 },
+                { q: 'O termo "Computer Use" da Anthropic refere-se a quê?',                           options: ['Uso da IA para minerar cripto', 'IA operando mouse e teclado do PC', 'IA que conserta hardware', 'IA que joga videogame'], correct: 1 },
+                { q: 'Qual destes modelos é de código aberto (Open Weights)?',                         options: ['GPT-4o', 'Llama 3.1', 'Gemini 1.5 Pro', 'Claude 3.5 Sonnet'],                    correct: 1 },
+                { q: 'DeepSeek é uma empresa originária de qual país?',                                options: ['França', 'EUA', 'China', 'Japão'],                                               correct: 2 },
+                { q: 'O que significa "Tokens" no contexto de LLMs?',                                  options: ['Moedas digitais', 'Unidades básicas de texto processadas', 'Senhas de acesso', 'Tipos de hardware'], correct: 1 },
+                { q: 'Qual a principal vantagem da Mistral AI para empresas corporativas?',             options: ['Preço fixo', 'Hospedagem local e privacidade', 'Melhores imagens', 'Integração com o Windows'], correct: 1 },
+                { q: 'Para que serve o Bolt.new ou Lovable?',                                          options: ['Editar vídeos', 'Gerar aplicações Web funcionais', 'Comprar domínios', 'Minificar código'], correct: 1 },
+                { q: 'Qual modelo costuma ser preferido para escrita criativa menos robótica?',         options: ['GPT-4o', 'Claude 3.5 Sonnet', 'DeepSeek', 'Llama'],                             correct: 1 },
+            ],
         });
 
-        window.onload = initQuiz;
+        // ─── OCP / SRP: renderizadores separados, fechados para modificação ──
+
+        const Renderer = {
+            /** ISP: interface mínima — recebe dados, retorna string HTML */
+            modelCard({ color, icon, name, description, features, highlight }) {
+                const items = features.map(f =>
+                    `<li><i class="fas fa-check text-${color}-400 mr-2"></i><strong>${f.label}:</strong> ${f.detail}</li>`
+                ).join('');
+                return `
+                    <div class="ia-card bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-${color}-500/20 rounded-xl text-${color}-400">
+                                <i class="fas ${icon} text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">${name}</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4">${description}</p>
+                        <ul class="text-sm space-y-2 mb-6">${items}</ul>
+                        <div class="bg-slate-900 p-3 rounded-lg text-xs text-${color}-300 font-mono">${highlight}</div>
+                    </div>`;
+            },
+
+            toolCard({ icon, color, name, description }) {
+                return `
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex gap-4">
+                        <div class="text-3xl text-${color}-400"><i class="fas ${icon}"></i></div>
+                        <div>
+                            <h4 class="font-bold">${name}</h4>
+                            <p class="text-sm text-slate-400 italic">${description}</p>
+                        </div>
+                    </div>`;
+            },
+
+            promptCard({ color, category, text }) {
+                return `
+                    <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-${color}-500">
+                        <span class="text-xs font-bold text-${color}-400 block mb-1 uppercase tracking-wider">${category}</span>
+                        <p class="text-sm text-slate-200">${text}</p>
+                    </div>`;
+            },
+
+            quizQuestion({ q, options }, index) {
+                const opts = options.map((opt, i) => `
+                    <div class="quiz-option p-3 border border-slate-700 rounded-xl text-sm"
+                         data-q="${index}" data-opt="${i}">
+                        ${opt}
+                    </div>`).join('');
+                return `
+                    <div class="quiz-question bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                        <p class="font-bold mb-4 text-slate-100">${index + 1}. ${q}</p>
+                        <div class="grid grid-cols-1 gap-3" id="q-options-${index}">${opts}</div>
+                        <p id="correct-ans-${index}" class="hidden text-xs mt-3 text-emerald-400 font-mono">
+                            Resposta Correta: ${options[DATA.questions[index]?.correct ?? 0]}
+                        </p>
+                    </div>`;
+            },
+        };
+
+        // ─── SRP: funções utilitárias puras ───────────────────────────────────
+
+        /** Fisher-Yates — sem mutar o array original */
+        function sampleN(arr, n) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy.slice(0, n);
+        }
+
+        function mountHTML(id, html) {
+            document.getElementById(id).innerHTML = html;
+        }
+
+        // ─── SRP: módulo de quiz isolado ──────────────────────────────────────
+
+        const Quiz = (() => {
+            const TOTAL = 10;
+            let selectedQuestions = [];
+            let userAnswers = [];
+
+            function init() {
+                selectedQuestions = sampleN(DATA.questions, TOTAL);
+                userAnswers = new Array(TOTAL).fill(null);
+
+                mountHTML(
+                    'quiz-container',
+                    selectedQuestions.map((q, i) => Renderer.quizQuestion(q, i)).join('')
+                );
+
+                // LSP / DIP: delegação de evento único em vez de handlers inline
+                document.getElementById('quiz-container')
+                    .addEventListener('click', handleOptionClick);
+
+                document.getElementById('submit-quiz')
+                    .addEventListener('click', handleSubmit);
+            }
+
+            function handleOptionClick(e) {
+                const el = e.target.closest('.quiz-option');
+                if (!el || el.classList.contains('disabled')) return;
+
+                const qIndex  = Number(el.dataset.q);
+                const optIndex = Number(el.dataset.opt);
+
+                userAnswers[qIndex] = optIndex;
+
+                const siblings = document.getElementById(`q-options-${qIndex}`).children;
+                for (const opt of siblings) opt.classList.remove('selected');
+                el.classList.add('selected');
+            }
+
+            function handleSubmit() {
+                if (userAnswers.some(a => a === null)) {
+                    alert('Por favor, responda todas as 10 questões antes de finalizar!');
+                    return;
+                }
+
+                const score = gradeQuiz();
+                renderResult(score);
+            }
+
+            function gradeQuiz() {
+                let score = 0;
+                selectedQuestions.forEach((item, index) => {
+                    const optionsEl = document.getElementById(`q-options-${index}`);
+                    const correctEl = document.getElementById(`correct-ans-${index}`);
+                    const chosen = userAnswers[index];
+
+                    correctEl.textContent = `Resposta Correta: ${item.options[item.correct]}`;
+                    correctEl.classList.remove('hidden');
+
+                    if (chosen === item.correct) {
+                        score++;
+                        optionsEl.children[chosen].classList.add('correct');
+                    } else {
+                        optionsEl.children[chosen].classList.add('incorrect');
+                        optionsEl.children[item.correct].classList.add('correct');
+                    }
+
+                    for (const opt of optionsEl.children) opt.classList.add('disabled');
+                });
+                return score;
+            }
+
+            function renderResult(score) {
+                const resultEl  = document.getElementById('result-display');
+                const scoreText = document.getElementById('score-text');
+                const submitBtn = document.getElementById('submit-quiz');
+
+                scoreText.textContent = `${score} de ${TOTAL} Acertos`;
+                scoreText.className   = `text-4xl font-extrabold mb-4 ${score >= 7 ? 'text-emerald-400' : 'text-orange-400'}`;
+
+                resultEl.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+                resultEl.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            return { init };
+        })();
+
+        // ─── Bootstrap: monta tudo após o DOM estar pronto ───────────────────
+
+        document.addEventListener('DOMContentLoaded', () => {
+            mountHTML('models-grid',  DATA.models.map(Renderer.modelCard).join(''));
+
+            // Divide ferramentas em duas colunas
+            const half = Math.ceil(DATA.tools.length / 2);
+            mountHTML('tools-grid', `
+                <div class="space-y-6">${DATA.tools.slice(0, half).map(Renderer.toolCard).join('')}</div>
+                <div class="space-y-6">${DATA.tools.slice(half).map(Renderer.toolCard).join('')}</div>
+            `);
+
+            mountHTML('prompts-list', DATA.prompts.map(Renderer.promptCard).join(''));
+
+            Quiz.init();
+        });
+    })();
     </script>
 </body>
 </html>
